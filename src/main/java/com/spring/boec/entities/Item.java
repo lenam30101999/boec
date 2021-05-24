@@ -5,9 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
-@Builder
+@MappedSuperclass
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
