@@ -1,20 +1,19 @@
 package com.spring.boec.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "electronic")
 @Builder
-public class Electronic {
+public class Electronic extends Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +22,11 @@ public class Electronic {
     @Column(name = "power")
     private int power;
 
-    @OneToOne(mappedBy = "electronic", fetch = FetchType.LAZY)
+    @JoinColumn(name = "manufacturer_id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Manufacturer manufacturer;
 
-
+    @JoinColumn(name = "publisher_id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Publisher publisher;
 }

@@ -23,10 +23,10 @@ public class Account implements Serializable {
   @Column(name = "name", nullable = false)
   private String name;
 
-  @Column(name = "Username", nullable = false, unique = true)
+  @Column(name = "username", nullable = false, unique = true)
   private String username;
 
-  @Column(name = "Password", nullable = false)
+  @Column(name = "password", nullable = false)
   private String password;
 
   @Column(name = "phoneNo", unique = true)
@@ -36,10 +36,6 @@ public class Account implements Serializable {
   private String role;
 
   private String gender;
-
-//  private String address;
-//
-//  private String email;
 
   @MapsId
   @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
