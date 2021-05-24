@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "user")
 @Builder
-public class User implements Serializable {
+public class Account implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,8 +37,13 @@ public class User implements Serializable {
 
   private String gender;
 
-  private String address;
+//  private String address;
+//
+//  private String email;
 
-  private String email;
+  @MapsId
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+  @JoinColumn(name = "id")
+  private Customer customer;
 
 }
