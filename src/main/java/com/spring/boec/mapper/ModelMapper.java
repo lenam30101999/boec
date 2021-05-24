@@ -1,6 +1,6 @@
 package com.spring.boec.mapper;
 
-import com.spring.boec.dtos.UserDTO;
+import com.spring.boec.dtos.AccountDTO;
 import com.spring.boec.entities.Account;
 import org.mapstruct.*;
 
@@ -9,5 +9,5 @@ public interface ModelMapper {
 
   @Mappings({
   })
-  UserDTO convertToUserDTO(Account account);
+  AccountDTO convertToUserDTO(Account account);
 }
