@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -26,9 +27,7 @@ public class Manufacturer {
     @Column(name = "address")
     private String address;
 
-    @MapsId
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "id")
-    private Electronic electronic;
+    @OneToMany(mappedBy = "manufacturer")
+    private List<Electronic> electronics;
 
 }

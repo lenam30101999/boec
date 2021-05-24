@@ -1,20 +1,18 @@
 package com.spring.boec.entities;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "book")
 @Builder
-public class Book {
+public class Book extends Item{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +24,11 @@ public class Book {
     @Column(name = "page_count")
     private int pageCount;
 
-    @OneToOne(mappedBy = "customer", fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Author author;
 
-    @OneToOne(mappedBy = "customer", fetch = FetchType.LAZY)
+    @JoinColumn(name = "publisher_id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Publisher publisher;
 }

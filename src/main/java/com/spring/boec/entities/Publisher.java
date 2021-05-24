@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -13,7 +15,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "publisher")
 @Builder
-public class Publisher {
+public class Publisher implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +27,12 @@ public class Publisher {
     @Column(name = "address")
     private String address;
 
-    @MapsId
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "id")
-    private Book book;
+    @OneToMany(mappedBy = "publisher")
+    private List<Book> books;
+
+    @OneToMany(mappedBy = "publisher")
+    private List<Electronic> electronics;
+
+    @OneToMany(mappedBy = "publisher")
+    private List<Clothes> clothes;
 }
