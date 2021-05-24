@@ -1,9 +1,9 @@
 package com.spring.boec.services;
 
-import com.spring.boec.dtos.UserDTO;
+import com.spring.boec.dtos.AccountDTO;
 import com.spring.boec.entities.Account;
 import com.spring.boec.mapper.ModelMapper;
-import com.spring.boec.repositories.UserRepository;
+import com.spring.boec.repositories.AccountRepository;
 import com.spring.boec.utils.Util;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,28 +15,28 @@ import java.util.Objects;
 @Log4j2
 @Service
 @Transactional
-public class UserService {
+public class AccountService {
 
   @Autowired
-  private UserRepository userRepository;
+  private AccountRepository accountRepository;
 
   @Autowired
   private ModelMapper modelMapper;
 
-  public String checkLogin(UserDTO userDTO){
-    if (userDTO.getUsername().equals("")) {
+  public String checkLogin(AccountDTO accountDTO){
+    if (accountDTO.getUsername().equals("")) {
       return Util.FILL_USERNAME;
     }
-    if (userDTO.getPassword().equals("")){
+    if (accountDTO.getPassword().equals("")){
       return Util.FILL_PASSWORD;
     }
-    if (userDTO.getPassword().length() < 5) {
+    if (accountDTO.getPassword().length() < 5) {
       return Util.WRONG_USERNAME_OR_PASSWORD;
     }
     return null;
   }
 
-  public String checkAfterLogin(UserDTO user) {
+  public String checkAfterLogin(AccountDTO user) {
     if (Objects.isNull(user)){
       return Util.ACCOUNT_NOT_EXISTS;
     }else if (Objects.isNull(user.getPassword())){
@@ -45,19 +45,19 @@ public class UserService {
     return null;
   }
 
-  public UserDTO userLogin(String username, String password) {
+  public AccountDTO userLogin(String username, String password) {
     try {
-      UserDTO userDTO;
-      Account account = userRepository.findUserByUsernameIgnoreCase(username);
+      AccountDTO accountDTO;
+      Account account = accountRepository.findUserByUsernameIgnoreCase(username);
       if (Objects.isNull(account)){
         return null;
       }else if (account.getPassword().equals(password)){
-        userDTO = modelMapper.convertToUserDTO(account);
-        return userDTO;
+        accountDTO = modelMapper.convertToUserDTO(account);
+        return accountDTO;
       }else {
-        userDTO = new UserDTO();
-        userDTO.setUsername(username);
-        return userDTO;
+        accountDTO = new AccountDTO();
+        accountDTO.setUsername(username);
+        return accountDTO;
       }
     }catch (Exception e){
       log.error(e);
