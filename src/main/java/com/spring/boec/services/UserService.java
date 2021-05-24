@@ -1,7 +1,7 @@
 package com.spring.boec.services;
 
 import com.spring.boec.dtos.UserDTO;
-import com.spring.boec.entities.User;
+import com.spring.boec.entities.Account;
 import com.spring.boec.mapper.ModelMapper;
 import com.spring.boec.repositories.UserRepository;
 import com.spring.boec.utils.Util;
@@ -48,11 +48,11 @@ public class UserService {
   public UserDTO userLogin(String username, String password) {
     try {
       UserDTO userDTO;
-      User user = userRepository.findUserByUsernameIgnoreCase(username);
-      if (Objects.isNull(user)){
+      Account account = userRepository.findUserByUsernameIgnoreCase(username);
+      if (Objects.isNull(account)){
         return null;
-      }else if (user.getPassword().equals(password)){
-        userDTO = modelMapper.convertToUserDTO(user);
+      }else if (account.getPassword().equals(password)){
+        userDTO = modelMapper.convertToUserDTO(account);
         return userDTO;
       }else {
         userDTO = new UserDTO();
