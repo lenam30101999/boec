@@ -25,10 +25,10 @@ public class Book extends Item{
     private int pageCount;
 
     @JoinColumn(name = "author_id")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private Author author;
 
     @JoinColumn(name = "publisher_id")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private Publisher publisher;
 }

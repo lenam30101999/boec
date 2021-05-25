@@ -11,9 +11,9 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Integer> {
 
     @Query(value = " select b from Book b where (?1 IS NULL or lower(b.name) like lower(concat('%',concat(?1,'%'))))" +
-            " or (?1 IS NULL or lower(b.author.name) like lower(concat('%',concat(?1,'%')))) ")
+            " or (?1 IS NULL or lower(b.author.name) like lower(concat('%',concat(?1,'%')))) " +
+            " or (?1 IS NULL or lower(b.publisher.name) like lower(concat('%',concat(?1,'%'))))")
     List<Book> findAllBook(String textSearch);
 
-    
 
 }
