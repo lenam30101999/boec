@@ -43,7 +43,7 @@ public class ClothesService {
   }
 
   public List<ClothesDTO> getListClothes(String textSearch){
-    List<Clothes> clothes = clothesRepository.findAllClothes(textSearch.trim());
+    List<Clothes> clothes = clothesRepository.getAllClothes(textSearch.trim());
     return convertToListClothesDTOs(clothes);
   }
 

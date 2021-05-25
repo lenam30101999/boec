@@ -26,19 +26,22 @@ public class ElectronicService {
     @Autowired
     private ElectronicRepository electronicRepository;
 
-    public ElectronicDTO addElectronic(ElectronicDTO ElectronicDTO){
+    public ElectronicDTO addElectronic(ElectronicDTO electronicDTO){
         Manufacturer manufacturer = Manufacturer.builder()
-                .id(ElectronicDTO.getManufacturer().getId())
+                .id(electronicDTO.getManufacturer().getId())
                 .build();
         Publisher publisher = Publisher.builder()
-                .id(ElectronicDTO.getPublisher().getId())
+                .id(electronicDTO.getPublisher().getId())
                 .build();
         Electronic electronic = Electronic.builder()
-                .name(ElectronicDTO.getName())
-                .power(ElectronicDTO.getPower())
+                .name(electronicDTO.getName())
+                .power(electronicDTO.getPower())
                 .manufacturer(manufacturer)
                 .publisher(publisher)
                 .build();
+
+        electronic.setPrice(electronicDTO.getPrice());
+        electronic.setStock(electronic.getStock());
         electronic = electronicRepository.save(electronic);
         return modelMapper.convertToElectronicDTO(electronic);
     }
@@ -48,19 +51,21 @@ public class ElectronicService {
         return modelMapper.convertListElectronic(electronics);
     }
 
-    public ElectronicDTO updateElectronic(ElectronicDTO ElectronicDTO){
-        Electronic electronic = electronicRepository.findById(ElectronicDTO.getId()).orElse(null);
+    public ElectronicDTO updateElectronic(ElectronicDTO electronicDTO){
+        Electronic electronic = electronicRepository.findById(electronicDTO.getId()).orElse(null);
         Manufacturer manufacturer = Manufacturer.builder()
-                .id(ElectronicDTO.getManufacturer().getId())
+                .id(electronicDTO.getManufacturer().getId())
                 .build();
         Publisher publisher = Publisher.builder()
-                .id(ElectronicDTO.getPublisher().getId())
+                .id(electronicDTO.getPublisher().getId())
                 .build();
         if (Objects.nonNull(electronic)){
-            electronic.setName(ElectronicDTO.getName());
-            electronic.setPower(ElectronicDTO.getPower());
+            electronic.setName(electronicDTO.getName());
+            electronic.setPower(electronicDTO.getPower());
             electronic.setManufacturer(manufacturer);
             electronic.setPublisher(publisher);
+            electronic.setPrice(electronic.getPrice());
+            electronic.setStock(electronic.getStock());
             electronicRepository.saveAndFlush(electronic);
         }
         return modelMapper.convertToElectronicDTO(electronic);

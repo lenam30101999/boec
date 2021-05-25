@@ -12,6 +12,10 @@ public class ElectronicDTO {
 
     private int id;
 
+    private long price;
+
+    private int stock;
+
     private int power;
 
     private String name;

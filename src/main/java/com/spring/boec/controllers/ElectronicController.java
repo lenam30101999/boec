@@ -1,8 +1,10 @@
 package com.spring.boec.controllers;
 
 import com.spring.boec.dtos.ElectronicDTO;
+import com.spring.boec.dtos.MessageDTO;
 import com.spring.boec.services.ElectronicService;
 import com.spring.boec.services.ElectronicService;
+import com.spring.boec.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +28,9 @@ public class ElectronicController {
     @PostMapping("/add-electronic")
     private ResponseEntity<?> addElectronic(@RequestBody ElectronicDTO ElectronicDTO){
         ElectronicDTO electronicDTO1 = electronicService.addElectronic(ElectronicDTO);
-        return new ResponseEntity<>(electronicDTO1, HttpStatus.CREATED);
+        if (electronicDTO1 != null){
+            return new ResponseEntity<>(new MessageDTO(Util.ADD_SUCCESS), HttpStatus.CREATED);
+        }else return new ResponseEntity<>(new MessageDTO(Util.INSERT_NOT_SUCCESS), HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping("/update-electronic")
