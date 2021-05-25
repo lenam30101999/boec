@@ -9,6 +9,10 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ModelMapper {
 
+  @Mappings({
+  })
+  ClothesDTO convertToClothesDTO(Clothes clothes);
+
   @Mappings({})
   FullNameDTO convertToFullNameDTO(FullName fullName);
 
@@ -20,10 +24,13 @@ public interface ModelMapper {
   AccountDTO convertToUserDTO(Account account);
 
   @Mappings({
+      @Mapping(target = "name", source = "name")
   })
   AuthorDTO convertToAuthorDTO(Author author);
 
   @Mappings({
+      @Mapping(target = "name", source = "name"),
+      @Mapping(target = "address", source = "address")
   })
   PublisherDTO convertToPublisherDTO(Publisher publisher);
 
