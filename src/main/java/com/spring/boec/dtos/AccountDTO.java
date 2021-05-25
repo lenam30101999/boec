@@ -2,25 +2,21 @@ package com.spring.boec.dtos;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class AccountDTO {
   private int id;
 
   @NotNull
-  private String name;
-
-  @NotNull
   private String username;
 
-  @NotNull
   private String password;
-
-  private String dob;
 
   @NotNull
   private String phoneNo;
@@ -30,8 +26,8 @@ public class AccountDTO {
 
   private String gender;
 
-  private String address;
+  private FullNameDTO fullName;
 
-  private String email;
+  private AddressDTO address;
 
 }

@@ -2,6 +2,9 @@ package com.spring.boec.services;
 
 import com.spring.boec.dtos.AccountDTO;
 import com.spring.boec.entities.Account;
+import com.spring.boec.entities.Address;
+import com.spring.boec.entities.Customer;
+import com.spring.boec.entities.FullName;
 import com.spring.boec.mapper.ModelMapper;
 import com.spring.boec.repositories.AccountRepository;
 import com.spring.boec.utils.Util;
@@ -41,6 +44,41 @@ public class AccountService {
       return Util.ACCOUNT_NOT_EXISTS;
     }else if (Objects.isNull(user.getPassword())){
       return Util.PASSWORD_WRONG;
+    }
+    return null;
+  }
+
+  public AccountDTO signup(AccountDTO accountDTO) {
+    try {
+      Address address = Address.builder()
+          .street(accountDTO.getAddress().getStreet())
+          .city(accountDTO.getAddress().getCity())
+          .build();
+
+      FullName fullName = FullName.builder()
+          .firstName(accountDTO.getFullName().getFirstName())
+          .middleName(accountDTO.getFullName().getMiddleName())
+          .lastName(accountDTO.getFullName().getLastName())
+          .build();
+
+      Customer customer = Customer.builder()
+          .address(address)
+          .fullName(fullName)
+          .build();
+
+      Account account = Account.builder()
+          .username(accountDTO.getUsername())
+          .password(accountDTO.getPassword())
+          .phoneNo(accountDTO.getPhoneNo())
+          .gender(accountDTO.getGender())
+          .role(accountDTO.getRole())
+          .customer(customer)
+          .build();
+
+      account = accountRepository.save(account);
+      return modelMapper.convertToUserDTO(account);
+    }catch (Exception e){
+      log.error(e);
     }
     return null;
   }

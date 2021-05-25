@@ -8,6 +8,8 @@ import org.mapstruct.*;
 public interface ModelMapper {
 
   @Mappings({
+      @Mapping(target = "fullName", source = "fullName"),
+      @Mapping(target = "address", source = "address")
   })
   AccountDTO convertToUserDTO(Account account);
 }

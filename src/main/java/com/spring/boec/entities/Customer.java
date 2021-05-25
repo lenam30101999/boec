@@ -22,9 +22,6 @@ public class Customer implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "phone_number")
-    private String phoneNumber;
-
     @OneToOne(mappedBy = "customer")
     private FullName fullName;
 

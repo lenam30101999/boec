@@ -2,6 +2,7 @@ package com.spring.boec.utils;
 
 public class Util {
   public static String USER_NOT_FOUND = "Không tìm thấy người dùng này!";
+  public static String INSERT_NOT_SUCCESS = "Tạo không thành công!";
   public static String FILL_USERNAME = "Vui lòng điền tên tài khoản";
   public static String FILL_PASSWORD = "Vui lòng điền mật khẩu";
   public static String WRONG_USERNAME_OR_PASSWORD = "Tên hoặc mật khẩu không đúng";

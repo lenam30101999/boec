@@ -20,9 +20,6 @@ public class Account implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
-  @Column(name = "name", nullable = false)
-  private String name;
-
   @Column(name = "username", nullable = false, unique = true)
   private String username;
 
