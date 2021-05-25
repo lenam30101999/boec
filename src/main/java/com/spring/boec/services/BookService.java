@@ -65,8 +65,8 @@ public class BookService {
         return modelMapper.convertToBookDTO(book);
     }
 
-    public BookDTO deleteBookDTO(BookDTO bookDTO){
-        Book book  = bookRepository.findById(bookDTO.getId()).orElse(null);
+    public BookDTO deleteBookDTO(int bookId){
+        Book book  = bookRepository.findById(bookId).orElse(null);
         if (Objects.nonNull(book)){
             bookRepository.delete(book);
             return modelMapper.convertToBookDTO(book);
