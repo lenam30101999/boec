@@ -22,11 +22,14 @@ public class Electronic extends Item {
     @Column(name = "power")
     private int power;
 
+    @Column(name = "name")
+    private String name;
+
     @JoinColumn(name = "manufacturer_id")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private Manufacturer manufacturer;
 
     @JoinColumn(name = "publisher_id")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private Publisher publisher;
 }

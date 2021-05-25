@@ -1,0 +1,43 @@
+package com.spring.boec.controllers;
+
+import com.spring.boec.dtos.ElectronicDTO;
+import com.spring.boec.services.ElectronicService;
+import com.spring.boec.services.ElectronicService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/v1/electronics")
+public class ElectronicController {
+
+    @Autowired
+    private ElectronicService electronicService;
+
+    @GetMapping()
+    private ResponseEntity<?> getAllElectronic(@RequestParam("textSearch") String textSearch){
+        List<ElectronicDTO> electronicDTOList  = electronicService.getListElectronic(textSearch);
+        return new ResponseEntity<>(electronicDTOList, HttpStatus.OK);
+    }
+
+    @PostMapping("/add-electronic")
+    private ResponseEntity<?> addElectronic(@RequestBody ElectronicDTO ElectronicDTO){
+        ElectronicDTO electronicDTO1 = electronicService.addElectronic(ElectronicDTO);
+        return new ResponseEntity<>(electronicDTO1, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update-electronic")
+    private ResponseEntity<?> updateElectronic(@RequestBody ElectronicDTO ElectronicDTO){
+        ElectronicDTO electronicDTO1 = electronicService.updateElectronic((ElectronicDTO));
+        return new ResponseEntity<>(electronicDTO1, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete-electronic/{electronicId}")
+    private ResponseEntity<?> deleteElectronic(@PathVariable("electronicId") int ElectronicId){
+        ElectronicDTO electronicDTO = electronicService.deleteElectronicDTO(ElectronicId);
+        return new ResponseEntity<>(electronicDTO, HttpStatus.OK);
+    }
+}

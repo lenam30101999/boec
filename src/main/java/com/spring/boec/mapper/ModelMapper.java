@@ -35,4 +35,16 @@ public interface ModelMapper {
   })
   List<BookDTO> convertToListBook(List<Book> books);
 
+  @Mappings({
+  })
+  ManuFacturerDTO convertToManufacturerDTO(Manufacturer manufacturer);
+
+  @Mappings({
+  })
+  ElectronicDTO convertToElectronicDTO(Electronic electronic);
+
+  @Mappings({
+  })
+  List<ElectronicDTO> convertListElectronic(List<Electronic> electronics);
+
 }
