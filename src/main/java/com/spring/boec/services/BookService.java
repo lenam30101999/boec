@@ -38,7 +38,6 @@ public class BookService {
                 .publisher(publisher)
                 .pageCount(bookDTO.getPageCount())
                 .build();
-        book = bookRepository.save(book);
         return modelMapper.convertToBookDTO(book);
     }
 

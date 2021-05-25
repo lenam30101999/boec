@@ -19,6 +19,8 @@ public class Electronic extends Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    protected String name;
+
     @Column(name = "power")
     private int power;
 

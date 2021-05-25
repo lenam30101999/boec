@@ -17,11 +17,13 @@ public class Clothes extends Item{
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+  protected String name;
+
   private String size;
 
   private String gender;
 
   @JoinColumn(name = "publisher_id")
-  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
   private Publisher publisher;
 }
