@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Data
-public class OderItemDTO {
+public class OrderItemDTO {
     private int id;
 
     @JsonProperty("book")

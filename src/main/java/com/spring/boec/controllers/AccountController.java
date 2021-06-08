@@ -21,7 +21,6 @@ public class AccountController {
     String messageError = accountService.checkLogin(accountDTO);
     AccountDTO data = accountService.userLogin(accountDTO.getUsername(), accountDTO.getPassword());
     String messageError2 = accountService.checkAfterLogin(data);
-
     if (messageError == null || messageError2 == null){
       return new ResponseEntity<>(data, HttpStatus.OK);
     }else return new ResponseEntity<>(new MessageDTO(messageError), HttpStatus.BAD_REQUEST);
@@ -30,9 +29,8 @@ public class AccountController {
   @PostMapping(path = "/signup")
   public ResponseEntity<?> signup(@RequestBody AccountDTO accountDTO) {
     AccountDTO data = accountService.signup(accountDTO);
-
     if (data != null){
-      return new ResponseEntity<>(data, HttpStatus.OK);
-    }else return new ResponseEntity<>(new MessageDTO(Util.INSERT_NOT_SUCCESS), HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>(Util.SIGN_UP_SUCCESS, HttpStatus.OK);
+    }else return new ResponseEntity<>(new MessageDTO(Util.USER_EXISTS), HttpStatus.BAD_REQUEST);
   }
 }

@@ -17,13 +17,7 @@ import java.util.stream.Collectors;
 @Log4j2
 @Service
 @Transactional
-public class ClothesService {
-
-  @Autowired
-  private ModelMapper modelMapper;
-
-  @Autowired
-  private ClothesRepository clothesRepository;
+public class ClothesService extends BaseService {
 
   public ClothesDTO addClothes(ClothesDTO clothesDTO){
     Publisher publisher = Publisher.builder()

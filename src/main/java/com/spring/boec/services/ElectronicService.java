@@ -18,13 +18,7 @@ import java.util.Objects;
 
 @Transactional
 @Service
-public class ElectronicService {
-
-    @Autowired
-    private ModelMapper modelMapper;
-
-    @Autowired
-    private ElectronicRepository electronicRepository;
+public class ElectronicService extends BaseService {
 
     public ElectronicDTO addElectronic(ElectronicDTO electronicDTO){
         Manufacturer manufacturer = Manufacturer.builder()
