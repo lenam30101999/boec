@@ -54,4 +54,17 @@ public interface ModelMapper {
   })
   List<ElectronicDTO> convertListElectronic(List<Electronic> electronics);
 
+  @Mappings({
+  })
+  CustomerDTO convertToCustomerDTO(Customer customer);
+
+  @Mappings({
+  })
+  List<RatingDTO> convertListRating(List<Rating> ratings);
+
+  @Mappings({
+  })
+  RatingDTO convertToRatingDTO(Rating rating);
+
+
 }

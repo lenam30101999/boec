@@ -36,4 +36,7 @@ public class Customer implements Serializable {
 
     @OneToMany(mappedBy = "customer")
     private List<Payment> payments;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Rating> ratings;
 }
