@@ -19,12 +19,14 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
+    @CrossOrigin(origins = "*")
     @GetMapping()
     private ResponseEntity<?> getAllBook(@RequestParam("textSearch") String textSearch){
         List<BookDTO> bookDTOList  = bookService.getListBook(textSearch);
         return new ResponseEntity<>(bookDTOList, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/add-book")
     private ResponseEntity<?> addBook(@RequestBody BookDTO bookDTO){
         BookDTO bookDTO1 = bookService.addBook(bookDTO);
@@ -36,18 +38,21 @@ public class BookController {
         }
     }
 
+    @CrossOrigin(origins = "*")
     @PutMapping("/update-book")
     private ResponseEntity<?> updateBook(@RequestBody BookDTO bookDTO){
         BookDTO bookDTO1 = bookService.updateBook((bookDTO));
         return new ResponseEntity<>(bookDTO1, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/delete-book/{bookId}")
     private ResponseEntity<?> deleteBook(@PathVariable("bookId") int bookId){
         BookDTO bookDTO = bookService.deleteBookDTO(bookId);
         return new ResponseEntity<>(bookDTO, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/get-book/{bookId}")
     private ResponseEntity<?> getBook(@PathVariable("bookId") int bookId){
         BookDTO bookDTO = bookService.getBookDTO(bookId);

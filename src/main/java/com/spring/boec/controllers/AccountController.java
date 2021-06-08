@@ -16,6 +16,7 @@ public class AccountController {
   @Autowired
   private AccountService accountService;
 
+  @CrossOrigin(origins = "*")
   @PostMapping(path = "/login")
   public ResponseEntity<?> login(@RequestBody AccountDTO accountDTO) {
     String messageError = accountService.checkLogin(accountDTO);
@@ -26,6 +27,7 @@ public class AccountController {
     }else return new ResponseEntity<>(new MessageDTO(messageError), HttpStatus.BAD_REQUEST);
   }
 
+  @CrossOrigin(origins = "*")
   @PostMapping(path = "/signup")
   public ResponseEntity<?> signup(@RequestBody AccountDTO accountDTO) {
     AccountDTO data = accountService.signup(accountDTO);
