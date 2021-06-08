@@ -30,4 +30,7 @@ public class Order implements Serializable {
   @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JoinColumn(name = "customer_id")
   private Customer customer;
+
+  @OneToOne(mappedBy = "order")
+  private Payment payment;
 }
