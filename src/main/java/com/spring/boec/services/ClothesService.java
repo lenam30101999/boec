@@ -74,6 +74,14 @@ public class ClothesService {
       return null;
   }
 
+  public ClothesDTO getClothesDTO(int clothesDTO){
+    Clothes clothes = clothesRepository.findById(clothesDTO).orElse(null);
+    if (Objects.nonNull(clothes)){
+      return modelMapper.convertToClothesDTO(clothes);
+    }else
+      return null;
+  }
+
   private List<ClothesDTO> convertToListClothesDTOs(List<Clothes> clothes){
     return clothes.stream().map(modelMapper::convertToClothesDTO).collect(Collectors.toList());
   }

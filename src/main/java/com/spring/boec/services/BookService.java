@@ -72,4 +72,12 @@ public class BookService {
             return null;
     }
 
+    public BookDTO getBookDTO(int bookId){
+        Book book = bookRepository.findById(bookId).orElse(null);
+        if (Objects.nonNull(book)){
+            return modelMapper.convertToBookDTO(book);
+        }else
+            return null;
+    }
+
 }

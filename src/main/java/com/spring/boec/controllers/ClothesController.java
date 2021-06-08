@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1/clothes")
@@ -45,5 +46,14 @@ public class ClothesController {
   private ResponseEntity<?> deleteClothes(@PathVariable("clothesId") int clothesId){
     ClothesDTO clothesDTO = clothesService.deleteClothesDTO(clothesId);
     return new ResponseEntity<>(clothesDTO, HttpStatus.OK);
+  }
+
+  @GetMapping("/get-clothes/{clothesId}")
+  private ResponseEntity<?> getClothes(@PathVariable("clothesId") int clothesId){
+    ClothesDTO clothesDTO = clothesService.getClothesDTO(clothesId);
+    if (Objects.nonNull(clothesDTO)) {
+      return new ResponseEntity<>(clothesDTO, HttpStatus.OK);
+    }else
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND.getReasonPhrase(),HttpStatus.NOT_FOUND);
   }
 }

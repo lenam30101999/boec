@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1/books")
@@ -45,5 +46,14 @@ public class BookController {
     private ResponseEntity<?> deleteBook(@PathVariable("bookId") int bookId){
         BookDTO bookDTO = bookService.deleteBookDTO(bookId);
         return new ResponseEntity<>(bookDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/get-book/{bookId}")
+    private ResponseEntity<?> getBook(@PathVariable("bookId") int bookId){
+        BookDTO bookDTO = bookService.getBookDTO(bookId);
+        if (Objects.nonNull(bookDTO)) {
+            return new ResponseEntity<>(bookDTO, HttpStatus.OK);
+        }else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND.getReasonPhrase(),HttpStatus.NOT_FOUND);
     }
 }
