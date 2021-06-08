@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,4 +21,7 @@ public class BookDTO {
 
     private PublisherDTO publisher;
 
+    private float avgRating;
+
+    private List<RatingDTO> ratings;
 }

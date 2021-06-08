@@ -66,5 +66,4 @@ public interface ModelMapper {
   })
   RatingDTO convertToRatingDTO(Rating rating);
 
-
 }
