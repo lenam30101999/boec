@@ -27,8 +27,6 @@ public class Address implements Serializable {
     @Column(name = "street")
     private String street;
 
-    @MapsId
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "id")
+    @OneToOne(mappedBy = "address")
     private Customer customer;
 }

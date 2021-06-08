@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BookDTO {
 
-    private int id;
+    private Integer id;
 
     private String name;
 

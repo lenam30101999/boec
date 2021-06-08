@@ -16,13 +16,7 @@ import java.util.Objects;
 
 @Service
 @Transactional
-public class BookService {
-
-    @Autowired
-    private ModelMapper modelMapper;
-
-    @Autowired
-    private BookRepository bookRepository;
+public class BookService extends BaseService {
 
     public BookDTO addBook(BookDTO bookDTO){
         Author author = Author.builder()
