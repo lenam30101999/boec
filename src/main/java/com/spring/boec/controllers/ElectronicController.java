@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1/electronics")
@@ -43,5 +44,14 @@ public class ElectronicController {
     private ResponseEntity<?> deleteElectronic(@PathVariable("electronicId") int ElectronicId){
         ElectronicDTO electronicDTO = electronicService.deleteElectronicDTO(ElectronicId);
         return new ResponseEntity<>(electronicDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/get-electronic/{electronicId}")
+    private ResponseEntity<?> getElectronic(@PathVariable("electronicId") int ElectronicId){
+        ElectronicDTO electronicDTO = electronicService.getElectronicDTO(ElectronicId);
+        if (Objects.nonNull(electronicDTO)) {
+            return new ResponseEntity<>(electronicDTO, HttpStatus.OK);
+        }else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND.getReasonPhrase(),HttpStatus.NOT_FOUND);
     }
 }

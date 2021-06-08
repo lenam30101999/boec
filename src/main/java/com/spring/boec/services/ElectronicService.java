@@ -79,4 +79,12 @@ public class ElectronicService {
         }else
             return null;
     }
+
+    public ElectronicDTO getElectronicDTO(int electronicId){
+        Electronic electronic  = electronicRepository.findById(electronicId).orElse(null);
+        if (Objects.nonNull(electronic)){
+            return modelMapper.convertToElectronicDTO(electronic);
+        }else
+            return null;
+    }
 }
