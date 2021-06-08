@@ -4,6 +4,7 @@ import com.spring.boec.dtos.RatingDTO;
 import com.spring.boec.entities.*;
 import com.spring.boec.mapper.ModelMapper;
 import com.spring.boec.repositories.*;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import java.util.Objects;
 
 @Service
 @Transactional
+@Log4j2
 public class RatingService {
 
     @Autowired
@@ -39,8 +41,8 @@ public class RatingService {
             Rating rating = Rating.builder()
                     .rate(ratingDTO.getRate())
                     .content(ratingDTO.getContent())
-                    .customer(customer)
                     .book(book)
+                    .customer(customer)
                     .build();
             repository.save(rating);
             return modelMapper.convertToRatingDTO(rating);

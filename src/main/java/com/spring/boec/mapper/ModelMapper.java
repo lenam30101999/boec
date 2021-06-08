@@ -27,13 +27,12 @@ public interface ModelMapper {
   AccountDTO convertToUserDTO(Account account);
 
   @Mappings({
-      @Mapping(target = "name", source = "name")
+      @Mapping(target = "id", source = "id")
   })
   AuthorDTO convertToAuthorDTO(Author author);
 
   @Mappings({
-      @Mapping(target = "name", source = "name"),
-      @Mapping(target = "address", source = "address")
+          @Mapping(target = "id", source = "id")
   })
   PublisherDTO convertToPublisherDTO(Publisher publisher);
 
