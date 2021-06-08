@@ -20,12 +20,14 @@ public class ElectronicController {
     @Autowired
     private ElectronicService electronicService;
 
+    @CrossOrigin(origins = "*")
     @GetMapping()
     private ResponseEntity<?> getAllElectronic(@RequestParam("textSearch") String textSearch){
         List<ElectronicDTO> electronicDTOList  = electronicService.getListElectronic(textSearch);
         return new ResponseEntity<>(electronicDTOList, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/add-electronic")
     private ResponseEntity<?> addElectronic(@RequestBody ElectronicDTO ElectronicDTO){
         ElectronicDTO electronicDTO1 = electronicService.addElectronic(ElectronicDTO);
@@ -34,18 +36,21 @@ public class ElectronicController {
         }else return new ResponseEntity<>(new MessageDTO(Util.INSERT_NOT_SUCCESS), HttpStatus.BAD_REQUEST);
     }
 
+    @CrossOrigin(origins = "*")
     @PutMapping("/update-electronic")
     private ResponseEntity<?> updateElectronic(@RequestBody ElectronicDTO ElectronicDTO){
         ElectronicDTO electronicDTO1 = electronicService.updateElectronic((ElectronicDTO));
         return new ResponseEntity<>(electronicDTO1, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/delete-electronic/{electronicId}")
     private ResponseEntity<?> deleteElectronic(@PathVariable("electronicId") int ElectronicId){
         ElectronicDTO electronicDTO = electronicService.deleteElectronicDTO(ElectronicId);
         return new ResponseEntity<>(electronicDTO, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/get-electronic/{electronicId}")
     private ResponseEntity<?> getElectronic(@PathVariable("electronicId") int ElectronicId){
         ElectronicDTO electronicDTO = electronicService.getElectronicDTO(ElectronicId);

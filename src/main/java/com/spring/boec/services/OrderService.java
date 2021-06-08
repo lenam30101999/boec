@@ -10,8 +10,6 @@ import javax.transaction.Transactional;
 @Log4j2
 @Service
 @Transactional
-public class OrderService {
+public class OrderService extends BaseService {
 
-  @Autowired
-  private OrderRepository orderRepository;
 }

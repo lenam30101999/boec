@@ -3,6 +3,7 @@ package com.spring.boec.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -26,4 +27,7 @@ public class Clothes extends Item{
   @JoinColumn(name = "publisher_id")
   @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
   private Publisher publisher;
+
+  @OneToMany(mappedBy = "clothes")
+  private List<Rating> ratings;
 }

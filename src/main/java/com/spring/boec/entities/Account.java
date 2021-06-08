@@ -26,7 +26,7 @@ public class Account implements Serializable {
   @Column(name = "password", nullable = false)
   private String password;
 
-  @Column(name = "phoneNo", unique = true)
+  @Column(name = "phoneNo")
   private String phoneNo;
 
   @Column(name = "role", nullable = false)

@@ -7,16 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookDTO {
+public class CustomerDTO {
 
     private Integer id;
-
-    private String name;
-
-    private int pageCount;
-
-    private AuthorDTO author;
-
-    private PublisherDTO publisher;
-
 }

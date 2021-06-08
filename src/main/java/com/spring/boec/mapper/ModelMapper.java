@@ -9,6 +9,9 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ModelMapper {
 
+  @Mappings({})
+  OrderItemDTO convertOrderItemDTO(OrderItem orderItem);
+
   @Mappings({
   })
   ClothesDTO convertToClothesDTO(Clothes clothes);
@@ -53,5 +56,18 @@ public interface ModelMapper {
   @Mappings({
   })
   List<ElectronicDTO> convertListElectronic(List<Electronic> electronics);
+
+  @Mappings({
+  })
+  CustomerDTO convertToCustomerDTO(Customer customer);
+
+  @Mappings({
+  })
+  List<RatingDTO> convertListRating(List<Rating> ratings);
+
+  @Mappings({
+  })
+  RatingDTO convertToRatingDTO(Rating rating);
+
 
 }
