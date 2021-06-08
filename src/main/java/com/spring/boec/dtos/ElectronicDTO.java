@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ElectronicDTO {
 
-    private int id;
+    private Integer id;
 
     private long price;
 
