@@ -9,8 +9,20 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ModelMapper {
 
+  @Mappings({})
+  PaymentDTO convertToPaymentDTO(Payment payment);
+
   @Mappings({
-          @Mapping(target = "id", source = "id")
+          @Mapping(target = "paymentDTO", source = "payment"),
+          @Mapping(target = "orderItemDTOS", source = "orderItems")
+  })
+  OrderDTO convertOrderDTO(Order order);
+
+  @Mappings({
+          @Mapping(target = "id", source = "id"),
+          @Mapping(target = "bookDTO", source = "book"),
+          @Mapping(target = "clothesDTO", source = "clothes"),
+          @Mapping(target = "electronicDTO", source = "electronic")
   })
   OrderItemDTO convertOrderItemDTO(OrderItem orderItem);
 
