@@ -82,14 +82,6 @@ public class AccountService extends BaseService {
     return null;
   }
 
-  private Address saveAddress(Address address){
-    return addressRepository.save(address);
-  }
-
-  private FullName saveFullName(FullName fullName){
-    return fullNameRepository.save(fullName);
-  }
-
   public AccountDTO userLogin(String username, String password) {
     try {
       AccountDTO accountDTO;

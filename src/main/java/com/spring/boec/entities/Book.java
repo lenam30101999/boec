@@ -31,4 +31,7 @@ public class Book extends Item{
     @JoinColumn(name = "publisher_id")
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private Publisher publisher;
+
+    @OneToOne(mappedBy = "book")
+    private OrderItem orderItem;
 }

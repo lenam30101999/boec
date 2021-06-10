@@ -26,4 +26,7 @@ public class Clothes extends Item{
   @JoinColumn(name = "publisher_id")
   @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
   private Publisher publisher;
+
+  @OneToOne(mappedBy = "clothes")
+  private OrderItem orderItem;
 }
