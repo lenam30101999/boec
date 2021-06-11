@@ -12,7 +12,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "clothes")
-public class Clothes extends Item{
+public class Clothes extends Item {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +30,7 @@ public class Clothes extends Item{
 
   @OneToMany(mappedBy = "clothes")
   private List<OrderItem> orderItem;
+
+  @OneToMany(mappedBy = "clothes")
+  private List<Rating> ratings;
 }

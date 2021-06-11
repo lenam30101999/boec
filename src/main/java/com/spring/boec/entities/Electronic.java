@@ -3,7 +3,6 @@ package com.spring.boec.entities;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 
@@ -36,4 +35,7 @@ public class Electronic extends Item {
 
     @OneToMany(mappedBy = "electronic")
     private List<OrderItem> orderItem;
+
+    @OneToMany(mappedBy = "electronic")
+    private List<Rating> ratings;
 }

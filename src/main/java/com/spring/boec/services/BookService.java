@@ -31,6 +31,7 @@ public class BookService extends BaseService {
                 .publisher(publisher)
                 .pageCount(bookDTO.getPageCount())
                 .build();
+        bookRepository.save(book);
         return modelMapper.convertToBookDTO(book);
     }
 
