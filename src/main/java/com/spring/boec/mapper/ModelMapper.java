@@ -13,8 +13,7 @@ public interface ModelMapper {
   PaymentDTO convertToPaymentDTO(Payment payment);
 
   @Mappings({
-          @Mapping(target = "paymentDTO", source = "payment"),
-          @Mapping(target = "orderItemDTOS", source = "orderItems")
+          @Mapping(target = "paymentDTO", source = "payment")
   })
   OrderDTO convertOrderDTO(Order order);
 
@@ -52,6 +51,8 @@ public interface ModelMapper {
   PublisherDTO convertToPublisherDTO(Publisher publisher);
 
   @Mappings({
+          @Mapping(target = "price", source = "price"),
+          @Mapping(target = "stock", source = "stock")
   })
   BookDTO convertToBookDTO(Book book);
 

@@ -22,5 +22,5 @@ public class OrderDTO {
     private PaymentDTO paymentDTO;
 
     @JsonProperty("order_items")
-    private List<OrderItemDTO> orderItemDTOS;
+    private List<OrderItemDTO> orderItems;
 }

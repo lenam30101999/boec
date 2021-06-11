@@ -13,6 +13,10 @@ public class BookDTO {
 
     private String name;
 
+    private int stock;
+
+    private long price;
+
     private int pageCount;
 
     private AuthorDTO author;

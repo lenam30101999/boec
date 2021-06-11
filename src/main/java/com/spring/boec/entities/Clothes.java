@@ -3,6 +3,7 @@ package com.spring.boec.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -27,6 +28,6 @@ public class Clothes extends Item{
   @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
   private Publisher publisher;
 
-  @OneToOne(mappedBy = "clothes")
-  private OrderItem orderItem;
+  @OneToMany(mappedBy = "clothes")
+  private List<OrderItem> orderItem;
 }

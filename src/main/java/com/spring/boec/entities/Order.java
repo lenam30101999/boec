@@ -1,9 +1,6 @@
 package com.spring.boec.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "`order`")
 @Builder
+@ToString
 public class Order implements Serializable {
 
   @Id
@@ -28,7 +26,7 @@ public class Order implements Serializable {
   @OneToMany(mappedBy = "order")
   private List<OrderItem> orderItems;
 
-  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JoinColumn(name = "customer_id", nullable = false)
   private Customer customer;
 

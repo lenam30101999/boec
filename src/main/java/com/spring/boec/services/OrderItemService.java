@@ -17,19 +17,20 @@ public class OrderItemService extends BaseService {
     public OrderItemDTO addOrderItem(OrderItemDTO orderItemDTO){
         Order order = orderRepository.findTopByCustomerIdOrderByIdDesc(orderItemDTO.getCustomerId());
         OrderItem orderItem;
-        if (Objects.nonNull(order)){
+        if (Objects.nonNull(order) && !order.getPayment().isPaid()){
             Map<String, Object> map = getOrderItem(orderItemDTO);
             orderItem = (OrderItem) map.get("object");
             long price = (long) map.get("price");
             if (orderItem != null){
+                orderItem.setOrder(order);
                 orderItem = orderItemRepository.save(orderItem);
-                    Payment payment = order.getPayment();
-                    payment.setTotalMoney(payment.getTotalMoney() + price);
-                    List<OrderItem> orderItems = order.getOrderItems();
-                    orderItems.add(orderItem);
-                    order.setPayment(payment);
-                    order.setOrderItems(orderItems);
-                    orderRepository.save(order);
+                Payment payment = order.getPayment();
+                payment.setTotalMoney(payment.getTotalMoney() + price * orderItemDTO.getQuantity());
+                List<OrderItem> orderItems = order.getOrderItems();
+                orderItems.add(orderItem);
+                order.setPayment(payment);
+                order.setOrderItems(orderItems);
+                orderRepository.save(order);
             }
         }else {
             orderItem = initNewOrder(orderItemDTO);
@@ -57,7 +58,7 @@ public class OrderItemService extends BaseService {
             order.setCustomer(customer);
             order.setOrderItems(new ArrayList<>(Collections.singletonList(orderItem)));
 
-            payment.setTotalMoney(price);
+            payment.setTotalMoney(price * orderItemDTO.getQuantity());
             payment.setCustomer(customer);
             payment.setPaid(false);
 
@@ -86,7 +87,8 @@ public class OrderItemService extends BaseService {
 
     private Map<String, Object> getBook(OrderItemDTO orderItemDTO){
         Map<String, Object> map = new HashMap<>();
-        if (orderItemDTO.getBookDTO().getId() != null){
+        if (orderItemDTO.getBookDTO() != null &&
+                orderItemDTO.getBookDTO().getId() != null){
             Book book = bookRepository.findById(orderItemDTO.getBookDTO().getId()).orElse(null);
             if (book != null && book.getStock() >= orderItemDTO.getQuantity()){
                 OrderItem saved = OrderItem.builder()
@@ -108,8 +110,9 @@ public class OrderItemService extends BaseService {
 
     private Map<String, Object> getClothes(OrderItemDTO orderItemDTO){
         Map<String, Object> map = new HashMap<>();
-        if (orderItemDTO.getBookDTO().getId() != null) {
-            Clothes clothes = clothesRepository.findById(orderItemDTO.getBookDTO().getId()).orElse(null);
+        if (orderItemDTO.getClothesDTO() != null &&
+                orderItemDTO.getClothesDTO().getId() != null) {
+            Clothes clothes = clothesRepository.findById(orderItemDTO.getClothesDTO().getId()).orElse(null);
             if (clothes != null && clothes.getStock() >= orderItemDTO.getQuantity()){
                 OrderItem saved = OrderItem.builder()
                         .clothes(clothes)
@@ -130,8 +133,9 @@ public class OrderItemService extends BaseService {
 
     private Map<String, Object> getElectronic(OrderItemDTO orderItemDTO){
         Map<String, Object> map = new HashMap<>();
-        if (orderItemDTO.getBookDTO().getId() != null) {
-            Electronic electronic = electronicRepository.findById(orderItemDTO.getBookDTO().getId()).orElse(null);
+        if (orderItemDTO.getElectronicDTO() != null &&
+                orderItemDTO.getElectronicDTO().getId() != null) {
+            Electronic electronic = electronicRepository.findById(orderItemDTO.getElectronicDTO().getId()).orElse(null);
             if (electronic != null){
                 OrderItem saved = OrderItem.builder()
                         .electronic(electronic)

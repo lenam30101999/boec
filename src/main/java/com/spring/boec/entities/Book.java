@@ -4,6 +4,7 @@ package com.spring.boec.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "book")
 @Builder
-public class Book extends Item{
+public class Book extends Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +33,6 @@ public class Book extends Item{
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private Publisher publisher;
 
-    @OneToOne(mappedBy = "book")
-    private OrderItem orderItem;
+    @OneToMany(mappedBy = "book")
+    private List<OrderItem> orderItem;
 }

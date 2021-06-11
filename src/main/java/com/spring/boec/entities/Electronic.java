@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 
 @EqualsAndHashCode(callSuper = true)
@@ -33,6 +34,6 @@ public class Electronic extends Item {
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private Publisher publisher;
 
-    @OneToOne(mappedBy = "electronic")
-    private OrderItem orderItem;
+    @OneToMany(mappedBy = "electronic")
+    private List<OrderItem> orderItem;
 }
