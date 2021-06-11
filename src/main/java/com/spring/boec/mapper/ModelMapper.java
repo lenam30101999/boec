@@ -10,6 +10,19 @@ import java.util.List;
 public interface ModelMapper {
 
   @Mappings({})
+  PaymentDTO convertToPaymentDTO(Payment payment);
+
+  @Mappings({
+          @Mapping(target = "paymentDTO", source = "payment")
+  })
+  OrderDTO convertOrderDTO(Order order);
+
+  @Mappings({
+          @Mapping(target = "id", source = "id"),
+          @Mapping(target = "bookDTO", source = "book"),
+          @Mapping(target = "clothesDTO", source = "clothes"),
+          @Mapping(target = "electronicDTO", source = "electronic")
+  })
   OrderItemDTO convertOrderItemDTO(OrderItem orderItem);
 
   @Mappings({
@@ -38,6 +51,8 @@ public interface ModelMapper {
   PublisherDTO convertToPublisherDTO(Publisher publisher);
 
   @Mappings({
+          @Mapping(target = "price", source = "price"),
+          @Mapping(target = "stock", source = "stock")
   })
   BookDTO convertToBookDTO(Book book);
 
