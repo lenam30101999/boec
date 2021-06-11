@@ -24,8 +24,8 @@ public class OrderItemController {
     public ResponseEntity<?> addOrderItem(@RequestBody OrderItemDTO orderItemDTO){
         OrderItemDTO saved = orderItemService.addOrderItem(orderItemDTO);
         if (saved != null){
-            return new ResponseEntity<>(Util.ADD_SUCCESS, HttpStatus.OK);
-        }else return new ResponseEntity<>(Util.ADD_NOT_SUCCESS, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new MessageDTO(Util.ADD_SUCCESS), HttpStatus.OK);
+        }else return new ResponseEntity<>(new MessageDTO(Util.ADD_NOT_SUCCESS), HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping
@@ -33,7 +33,7 @@ public class OrderItemController {
         List<OrderItemDTO> orderItemDTOS = orderItemService.updateOrderItem(orderItemDTOs);
         if (orderItemDTOS.size() > 0){
             return new ResponseEntity<>(orderItemDTOS, HttpStatus.OK);
-        }else return new ResponseEntity<>(Util.ADD_NOT_SUCCESS, HttpStatus.BAD_REQUEST);
+        }else return new ResponseEntity<>(new MessageDTO(Util.ADD_NOT_SUCCESS), HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -41,6 +41,6 @@ public class OrderItemController {
         OrderItemDTO orderItemDTO = orderItemService.deleteOrderItem(id);
         if (orderItemDTO != null){
             return new ResponseEntity<>(new MessageDTO(Util.DELETE_SUCCESS), HttpStatus.OK);
-        }else return new ResponseEntity<>(Util.ADD_NOT_SUCCESS, HttpStatus.BAD_REQUEST);
+        }else return new ResponseEntity<>(new MessageDTO(Util.ADD_NOT_SUCCESS), HttpStatus.BAD_REQUEST);
     }
 }

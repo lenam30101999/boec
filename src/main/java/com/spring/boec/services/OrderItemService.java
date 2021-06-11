@@ -66,10 +66,12 @@ public class OrderItemService extends BaseService {
         OrderItem orderItem = orderItemRepository.findById(id).orElse(null);
         if (Objects.nonNull(orderItem)){
             Order order = orderRepository.findById(orderItem.getOrder().getId());
-            orderItemRepository.delete(orderItem);
             Payment payment = order.getPayment();
-            payment.setTotalMoney(payment.getTotalMoney() - orderItem.getQuantity() * getPrice(id));
+            long price = getPrice(id);
+            payment.setTotalMoney(payment.getTotalMoney() - orderItem.getQuantity() * price);
+
             paymentRepository.saveAndFlush(payment);
+            orderItemRepository.delete(orderItem);
             return modelMapper.convertOrderItemDTO(orderItem);
         }
         return null;
@@ -116,7 +118,7 @@ public class OrderItemService extends BaseService {
     }
 
     private long getPrice(int orderItemId){
-        OrderItem orderItem = orderItemRepository.findById(orderItemId).orElse(null);
+        OrderItem orderItem = orderItemRepository.findOrderItemById(orderItemId).orElse(null);
         if (Objects.nonNull(orderItem)){
             if (orderItem.getBook() != null) {
                 return orderItem.getBook().getPrice();

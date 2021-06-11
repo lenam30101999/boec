@@ -57,6 +57,6 @@ public class ElectronicController {
         if (Objects.nonNull(electronicDTO)) {
             return new ResponseEntity<>(electronicDTO, HttpStatus.OK);
         }else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND.getReasonPhrase(),HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new MessageDTO(Util.NOT_FOUND), HttpStatus.NOT_FOUND);
     }
 }

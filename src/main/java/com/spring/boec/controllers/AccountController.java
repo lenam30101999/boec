@@ -32,7 +32,7 @@ public class AccountController {
   public ResponseEntity<?> signup(@RequestBody AccountDTO accountDTO) {
     AccountDTO data = accountService.signup(accountDTO);
     if (data != null){
-      return new ResponseEntity<>(Util.SIGN_UP_SUCCESS, HttpStatus.OK);
+      return new ResponseEntity<>(new MessageDTO(Util.SIGN_UP_SUCCESS), HttpStatus.OK);
     }else return new ResponseEntity<>(new MessageDTO(Util.USER_EXISTS), HttpStatus.BAD_REQUEST);
   }
 }

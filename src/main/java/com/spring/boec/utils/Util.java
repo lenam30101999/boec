@@ -18,4 +18,5 @@ public class Util {
   public static String ADD_NOT_SUCCESS = "Thêm không thành công";
   public static String DELETE_SUCCESS = "Xoá thành công";
   public static String CART_IS_EMPTY = "Giỏ hàng bạn trống";
+  public static String NOT_FOUND = "Không tìm thấy!";
 }
