@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -41,9 +42,38 @@ public class OrderItemService extends BaseService {
         }else return null;
     }
 
-//    public OrderItemDTO updateOrderItem(OrderItemDTO orderItemDTO){
-//
-//    }
+    public List<OrderItemDTO> updateOrderItem(List<OrderItemDTO> orderItemDTOs){
+        int customerId = orderItemDTOs.get(0).getCustomerId();
+        Order order = orderRepository.findTopByCustomerIdOrderByIdDesc(customerId);
+        List<OrderItem> orderItems = order.getOrderItems();
+        Payment payment = order.getPayment();
+
+        if (!payment.isPaid()){
+            for (OrderItemDTO orderItemDTO : orderItemDTOs){
+                OrderItem updated = orderItemRepository.findById(orderItemDTO.getId()).orElse(null);
+                if (Objects.nonNull(updated)){
+                    updated.setQuantity(orderItemDTO.getQuantity());
+                    orderItemRepository.saveAndFlush(updated);
+                }
+            }
+            payment.setTotalMoney(orderItems.stream().mapToLong(p -> getPrice(p.getId()) * p.getQuantity()).sum());
+            paymentRepository.saveAndFlush(payment);
+            return orderItems.stream().map(modelMapper::convertOrderItemDTO).collect(Collectors.toList());
+        }else return null;
+    }
+
+    public OrderItemDTO deleteOrderItem(int id){
+        OrderItem orderItem = orderItemRepository.findById(id).orElse(null);
+        if (Objects.nonNull(orderItem)){
+            Order order = orderRepository.findById(orderItem.getOrder().getId());
+            orderItemRepository.delete(orderItem);
+            Payment payment = order.getPayment();
+            payment.setTotalMoney(payment.getTotalMoney() - orderItem.getQuantity() * getPrice(id));
+            paymentRepository.saveAndFlush(payment);
+            return modelMapper.convertOrderItemDTO(orderItem);
+        }
+        return null;
+    }
 
     private OrderItem initNewOrder(OrderItemDTO orderItemDTO){
         Customer customer = customerRepository.findById(orderItemDTO.getCustomerId()).orElse(null);
@@ -83,6 +113,20 @@ public class OrderItemService extends BaseService {
             map = getElectronic(orderItemDTO);
         }
         return map;
+    }
+
+    private long getPrice(int orderItemId){
+        OrderItem orderItem = orderItemRepository.findById(orderItemId).orElse(null);
+        if (Objects.nonNull(orderItem)){
+            if (orderItem.getBook() != null) {
+                return orderItem.getBook().getPrice();
+            } else if (orderItem.getClothes() != null) {
+                return orderItem.getClothes().getPrice();
+            } else if (orderItem.getElectronic() != null) {
+                return orderItem.getElectronic().getPrice();
+            }
+        }
+        return 0;
     }
 
     private Map<String, Object> getBook(OrderItemDTO orderItemDTO){
