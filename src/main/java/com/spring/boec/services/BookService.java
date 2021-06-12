@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -31,6 +32,10 @@ public class BookService extends BaseService {
                 .publisher(publisher)
                 .pageCount(bookDTO.getPageCount())
                 .build();
+        book.setStock(bookDTO.getStock());
+        book.setUrlImage(bookDTO.getUrlImage());
+        book.setPrice(bookDTO.getPrice());
+
         bookRepository.save(book);
         return modelMapper.convertToBookDTO(book);
     }
@@ -50,12 +55,18 @@ public class BookService extends BaseService {
                 .build();
         if (Objects.nonNull(book)){
             book.setName(bookDTO.getName());
+            book.setUrlImage(bookDTO.getUrlImage());
             book.setPageCount(bookDTO.getPageCount());
             book.setAuthor(author);
             book.setPublisher(publisher);
             bookRepository.saveAndFlush(book);
         }
         return modelMapper.convertToBookDTO(book);
+    }
+
+    public List<BookDTO> getAllBook(){
+        List<Book> books = bookRepository.findAll();
+        return books.stream().map(modelMapper::convertToBookDTO).collect(Collectors.toList());
     }
 
     public BookDTO deleteBookDTO(int bookId){
