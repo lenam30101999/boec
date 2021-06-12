@@ -19,4 +19,7 @@ public abstract class Item implements Serializable {
 
   @Column(name = "stock")
   protected int stock;
+
+  @Column(name = "url_image")
+  private String urlImage;
 }

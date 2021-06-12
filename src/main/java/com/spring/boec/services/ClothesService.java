@@ -30,6 +30,7 @@ public class ClothesService extends BaseService {
         .gender(clothesDTO.getGender())
         .build();
 
+    clothes.setUrlImage(clothesDTO.getUrlImage());
     clothes.setPrice(clothesDTO.getPrice());
     clothes.setStock(clothesDTO.getStock());
     clothes = clothesRepository.save(clothes);
@@ -41,6 +42,11 @@ public class ClothesService extends BaseService {
     return convertToListClothesDTOs(clothes);
   }
 
+  public List<ClothesDTO> getAllClothes(){
+    List<Clothes> clothes = clothesRepository.findAll();
+    return convertToListClothesDTOs(clothes);
+  }
+
   public ClothesDTO updateClothes(ClothesDTO clothesDTO){
     Clothes clothes = clothesRepository.findById(clothesDTO.getId()).orElse(null);
     Publisher publisher = Publisher.builder()
@@ -49,6 +55,7 @@ public class ClothesService extends BaseService {
     if (Objects.nonNull(clothes)){
       clothes.setName(clothesDTO.getName());
       clothes.setPublisher(publisher);
+      clothes.setUrlImage(clothesDTO.getUrlImage());
       clothes.setGender(clothesDTO.getGender());
       clothes.setSize(clothesDTO.getSize());
       clothes.setPrice(clothesDTO.getPrice());

@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @Transactional
@@ -34,8 +35,9 @@ public class ElectronicService extends BaseService {
                 .publisher(publisher)
                 .build();
 
+        electronic.setUrlImage(electronicDTO.getUrlImage());
         electronic.setPrice(electronicDTO.getPrice());
-        electronic.setStock(electronic.getStock());
+        electronic.setStock(electronicDTO.getStock());
         electronic = electronicRepository.save(electronic);
         return modelMapper.convertToElectronicDTO(electronic);
     }
@@ -58,8 +60,9 @@ public class ElectronicService extends BaseService {
             electronic.setPower(electronicDTO.getPower());
             electronic.setManufacturer(manufacturer);
             electronic.setPublisher(publisher);
-            electronic.setPrice(electronic.getPrice());
-            electronic.setStock(electronic.getStock());
+            electronic.setUrlImage(electronicDTO.getUrlImage());
+            electronic.setPrice(electronicDTO.getPrice());
+            electronic.setStock(electronicDTO.getStock());
             electronicRepository.saveAndFlush(electronic);
         }
         return modelMapper.convertToElectronicDTO(electronic);
@@ -80,5 +83,10 @@ public class ElectronicService extends BaseService {
             return modelMapper.convertToElectronicDTO(electronic);
         }else
             return null;
+    }
+
+    public List<ElectronicDTO> getAllElectronic(){
+        List<Electronic> electronics = electronicRepository.findAll();
+        return electronics.stream().map(modelMapper::convertToElectronicDTO).collect(Collectors.toList());
     }
 }
