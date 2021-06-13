@@ -21,9 +21,16 @@ public class ElectronicController {
     private ElectronicService electronicService;
 
     @CrossOrigin(origins = "*")
+    @GetMapping(params = "textSearch")
+    private ResponseEntity<?> getAllElectronicBySearch(@RequestParam("textSearch") String textSearch){
+        List<ElectronicDTO> electronicDTOList = electronicService.getListElectronic(textSearch);
+        return new ResponseEntity<>(electronicDTOList, HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "*")
     @GetMapping()
-    private ResponseEntity<?> getAllElectronic(@RequestParam("textSearch") String textSearch){
-        List<ElectronicDTO> electronicDTOList  = electronicService.getListElectronic(textSearch);
+    private ResponseEntity<?> getAllElectronic(){
+        List<ElectronicDTO> electronicDTOList = electronicService.getAllElectronic();
         return new ResponseEntity<>(electronicDTOList, HttpStatus.OK);
     }
 
@@ -57,6 +64,6 @@ public class ElectronicController {
         if (Objects.nonNull(electronicDTO)) {
             return new ResponseEntity<>(electronicDTO, HttpStatus.OK);
         }else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND.getReasonPhrase(),HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new MessageDTO(Util.NOT_FOUND), HttpStatus.NOT_FOUND);
     }
 }

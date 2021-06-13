@@ -8,12 +8,15 @@ import com.spring.boec.entities.Publisher;
 import com.spring.boec.mapper.ModelMapper;
 import com.spring.boec.repositories.ElectronicRepository;
 import com.spring.boec.repositories.ElectronicRepository;
+import com.spring.boec.utils.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @Transactional
@@ -34,8 +37,9 @@ public class ElectronicService extends BaseService {
                 .publisher(publisher)
                 .build();
 
+        electronic.setUrlImage(electronicDTO.getUrlImage());
         electronic.setPrice(electronicDTO.getPrice());
-        electronic.setStock(electronic.getStock());
+        electronic.setStock(electronicDTO.getStock());
         electronic = electronicRepository.save(electronic);
         return modelMapper.convertToElectronicDTO(electronic);
     }
@@ -58,8 +62,9 @@ public class ElectronicService extends BaseService {
             electronic.setPower(electronicDTO.getPower());
             electronic.setManufacturer(manufacturer);
             electronic.setPublisher(publisher);
-            electronic.setPrice(electronic.getPrice());
-            electronic.setStock(electronic.getStock());
+            electronic.setUrlImage(electronicDTO.getUrlImage());
+            electronic.setPrice(electronicDTO.getPrice());
+            electronic.setStock(electronicDTO.getStock());
             electronicRepository.saveAndFlush(electronic);
         }
         return modelMapper.convertToElectronicDTO(electronic);
@@ -75,10 +80,21 @@ public class ElectronicService extends BaseService {
     }
 
     public ElectronicDTO getElectronicDTO(int electronicId){
+        List<Float> rateList = new ArrayList<>();
         Electronic electronic  = electronicRepository.findById(electronicId).orElse(null);
         if (Objects.nonNull(electronic)){
-            return modelMapper.convertToElectronicDTO(electronic);
+            electronic.getRatings().stream().forEach(p->rateList.add(p.getRate()));
+            float calculateRating = Helper.calculateRating(rateList);
+            ElectronicDTO electronicDTO =  modelMapper.convertToElectronicDTO(electronic);
+            electronicDTO.setAvgRating(calculateRating);
+            return electronicDTO;
         }else
             return null;
     }
+
+    public List<ElectronicDTO> getAllElectronic(){
+        List<Electronic> electronics = electronicRepository.findAll();
+        return electronics.stream().map(modelMapper::convertToElectronicDTO).collect(Collectors.toList());
+    }
+
 }

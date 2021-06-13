@@ -15,8 +15,11 @@ import java.io.Serializable;
 public abstract class Item implements Serializable {
 
   @Column(name = "price")
-  protected double price;
+  protected long price;
 
   @Column(name = "stock")
   protected int stock;
+
+  @Column(name = "url_image")
+  private String urlImage;
 }

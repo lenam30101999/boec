@@ -23,11 +23,14 @@ public class Payment implements Serializable {
     @Column(name = "total_money")
     private long totalMoney;
 
+    @Column(name = "is_paid")
+    private boolean isPaid;
+
     @JoinColumn(name = "order_id")
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Order order;
 
     @JoinColumn(name = "customer_id")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Customer customer;
 }
