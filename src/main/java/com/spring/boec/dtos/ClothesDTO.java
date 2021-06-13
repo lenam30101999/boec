@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,4 +29,9 @@ public class ClothesDTO {
   private String gender;
 
   private PublisherDTO publisher;
+
+  private List<RatingDTO> ratings;
+
+  @JsonProperty("avg_rating")
+  private float avgRating;
 }

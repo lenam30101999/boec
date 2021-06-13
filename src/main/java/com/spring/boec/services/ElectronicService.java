@@ -8,10 +8,12 @@ import com.spring.boec.entities.Publisher;
 import com.spring.boec.mapper.ModelMapper;
 import com.spring.boec.repositories.ElectronicRepository;
 import com.spring.boec.repositories.ElectronicRepository;
+import com.spring.boec.utils.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -78,9 +80,14 @@ public class ElectronicService extends BaseService {
     }
 
     public ElectronicDTO getElectronicDTO(int electronicId){
+        List<Float> rateList = new ArrayList<>();
         Electronic electronic  = electronicRepository.findById(electronicId).orElse(null);
         if (Objects.nonNull(electronic)){
-            return modelMapper.convertToElectronicDTO(electronic);
+            electronic.getRatings().stream().forEach(p->rateList.add(p.getRate()));
+            float calculateRating = Helper.calculateRating(rateList);
+            ElectronicDTO electronicDTO =  modelMapper.convertToElectronicDTO(electronic);
+            electronicDTO.setAvgRating(calculateRating);
+            return electronicDTO;
         }else
             return null;
     }
@@ -89,4 +96,5 @@ public class ElectronicService extends BaseService {
         List<Electronic> electronics = electronicRepository.findAll();
         return electronics.stream().map(modelMapper::convertToElectronicDTO).collect(Collectors.toList());
     }
+
 }

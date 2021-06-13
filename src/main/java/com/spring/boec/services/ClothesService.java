@@ -5,11 +5,13 @@ import com.spring.boec.entities.Clothes;
 import com.spring.boec.entities.Publisher;
 import com.spring.boec.mapper.ModelMapper;
 import com.spring.boec.repositories.ClothesRepository;
+import com.spring.boec.utils.Helper;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -76,9 +78,14 @@ public class ClothesService extends BaseService {
   }
 
   public ClothesDTO getClothesDTO(int clothesDTO){
+    List<Float> rateList = new ArrayList<>();
     Clothes clothes = clothesRepository.findById(clothesDTO).orElse(null);
     if (Objects.nonNull(clothes)){
-      return modelMapper.convertToClothesDTO(clothes);
+      clothes.getRatings().stream().forEach(p->rateList.add(p.getRate()));
+      ClothesDTO clothesDTO1 =  modelMapper.convertToClothesDTO(clothes);
+      float calculateRating = Helper.calculateRating(rateList);
+      clothesDTO1.setAvgRating(calculateRating);
+      return clothesDTO1;
     }else
       return null;
   }

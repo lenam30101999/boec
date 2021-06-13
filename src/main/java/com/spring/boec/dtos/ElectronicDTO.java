@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,4 +29,9 @@ public class ElectronicDTO {
     private ManuFacturerDTO manufacturer;
 
     private PublisherDTO publisher;
+
+    private List<RatingDTO> ratings;
+
+    @JsonProperty("avg_rating")
+    private float avgRating;
 }

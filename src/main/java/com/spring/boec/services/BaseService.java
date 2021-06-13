@@ -16,6 +16,6 @@ public class BaseService {
     @Autowired protected CustomerRepository customerRepository;
     @Autowired protected AddressRepository addressRepository;
     @Autowired protected FullNameRepository fullNameRepository;
-    @Autowired protected PaymentRepository paymentRepository;
     @Autowired protected RatingRepository ratingRepository;
+    @Autowired protected PaymentRepository paymentRepository;
 }

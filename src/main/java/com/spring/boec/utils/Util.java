@@ -12,6 +12,7 @@ public class Util {
   public static String PASSWORD_WRONG = "Sai mật khẩu";
   public static String IDENTIFY_CARD_WRONG_FORMAT = "Định dạng thẻ sinh viên sai";
   public static String UPDATED_SUCCESS = "Thay đổi thành công";
+  public static String UPDATED_NOT_SUCCESS = "Thay đổi không thành công";
   public static String ADD_SUCCESS = "Thêm thành công";
   public static String CHECKOUT_SUCCESS = "Thanh toán thành công";
   public static String CHECKOUT_NOT_SUCCESS = "Thanh toán không thành công";
@@ -19,4 +20,11 @@ public class Util {
   public static String DELETE_SUCCESS = "Xoá thành công";
   public static String CART_IS_EMPTY = "Giỏ hàng bạn trống";
   public static String NOT_FOUND = "Không tìm thấy!";
+
+  //State Order
+  public static String PENDING = "PENDING";
+  public static String APPROVED = "APPROVED";
+  public static String REJECTED = "REJECTED";
+  public static String RECEIVED = "RECEIVED";
+
 }

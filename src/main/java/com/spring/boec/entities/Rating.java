@@ -31,14 +31,14 @@ public class Rating implements Serializable {
     private Customer customer;
 
     @JoinColumn(name = "book_id")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Book book;
 
     @JoinColumn(name = "clothes_id")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Clothes clothes;
 
     @JoinColumn(name = "electronic_id")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Electronic electronic;
 }

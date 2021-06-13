@@ -22,4 +22,5 @@ public abstract class Item implements Serializable {
 
   @Column(name = "url_image")
   private String urlImage;
+
 }
