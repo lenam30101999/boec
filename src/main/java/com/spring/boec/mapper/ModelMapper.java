@@ -2,8 +2,10 @@ package com.spring.boec.mapper;
 
 import com.spring.boec.dtos.*;
 import com.spring.boec.entities.*;
+import com.spring.boec.utils.Helper;
 import org.mapstruct.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
@@ -61,6 +63,13 @@ public interface ModelMapper {
   @Mappings({
   })
   List<BookDTO> convertToListBook(List<Book> books);
+  @AfterMapping
+  static void calculateRating(@MappingTarget BookDTO bookDTO, Book book){
+    List<Float> rateList = new ArrayList<>();
+    book.getRatings().stream().forEach(p->rateList.add(p.getRate()));
+    float calculate = Helper.calculateRating(rateList);
+    bookDTO.setAvgRating(calculate);
+  }
 
   @Mappings({
   })
