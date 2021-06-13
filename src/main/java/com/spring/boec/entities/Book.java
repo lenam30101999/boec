@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "book")
 @Builder
-public class Book extends Item{
+public class Book extends Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +32,9 @@ public class Book extends Item{
     @JoinColumn(name = "publisher_id")
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private Publisher publisher;
+
+    @OneToMany(mappedBy = "book")
+    private List<OrderItem> orderItem;
 
     @OneToMany(mappedBy = "book")
     private List<Rating> ratings;

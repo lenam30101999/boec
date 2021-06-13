@@ -20,8 +20,8 @@ public class BookController {
     private BookService bookService;
 
     @CrossOrigin(origins = "*")
-    @GetMapping()
-    private ResponseEntity<?> getAllBook(@RequestParam("textSearch") String textSearch){
+    @GetMapping(params = "textSearch")
+    private ResponseEntity<?> getAllBookBySearch(@RequestParam("textSearch") String textSearch){
         List<BookDTO> bookDTOList  = bookService.getListBook(textSearch);
         return new ResponseEntity<>(bookDTOList, HttpStatus.OK);
     }
@@ -60,5 +60,12 @@ public class BookController {
             return new ResponseEntity<>(bookDTO, HttpStatus.OK);
         }else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND.getReasonPhrase(),HttpStatus.NOT_FOUND);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping()
+    private ResponseEntity<?> getAllBook(){
+        List<BookDTO> bookDTOs = bookService.getAllBook();
+        return new ResponseEntity<>(bookDTOs, HttpStatus.OK);
     }
 }

@@ -25,5 +25,8 @@ public class OrderItemDTO {
     @JsonProperty("customer_id")
     private int customerId;
 
+    @JsonProperty("order_id")
+    private int orderId;
+
     private int quantity;
 }

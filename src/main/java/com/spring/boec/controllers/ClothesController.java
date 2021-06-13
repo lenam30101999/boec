@@ -20,9 +20,16 @@ public class ClothesController {
   private ClothesService clothesService;
 
   @CrossOrigin(origins = "*")
+  @GetMapping(params = "textSearch")
+  private ResponseEntity<?> getAllClothesBySearch(@RequestParam("textSearch") String textSearch){
+    List<ClothesDTO> clothesDTOList = clothesService.getListClothes(textSearch);
+    return new ResponseEntity<>(clothesDTOList, HttpStatus.OK);
+  }
+
+  @CrossOrigin(origins = "*")
   @GetMapping()
-  private ResponseEntity<?> getAllClothes(@RequestParam("textSearch") String textSearch){
-    List<ClothesDTO> clothesDTOList  = clothesService.getListClothes(textSearch);
+  private ResponseEntity<?> getAllClothes(){
+    List<ClothesDTO> clothesDTOList = clothesService.getAllClothes();
     return new ResponseEntity<>(clothesDTOList, HttpStatus.OK);
   }
 
@@ -59,6 +66,6 @@ public class ClothesController {
     if (Objects.nonNull(clothesDTO)) {
       return new ResponseEntity<>(clothesDTO, HttpStatus.OK);
     }else
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND.getReasonPhrase(),HttpStatus.NOT_FOUND);
+      return new ResponseEntity<>(new MessageDTO(Util.NOT_FOUND), HttpStatus.NOT_FOUND);
   }
 }

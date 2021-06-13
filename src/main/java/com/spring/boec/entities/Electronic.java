@@ -34,5 +34,8 @@ public class Electronic extends Item {
     private Publisher publisher;
 
     @OneToMany(mappedBy = "electronic")
+    private List<OrderItem> orderItem;
+
+    @OneToMany(mappedBy = "electronic")
     private List<Rating> ratings;
 }
