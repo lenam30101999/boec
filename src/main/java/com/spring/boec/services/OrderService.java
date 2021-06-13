@@ -17,7 +17,9 @@ public class OrderService extends BaseService {
     public OrderDTO getOrderByCustomer(int customerId){
         Order order = orderRepository.findTopByCustomerIdOrderByIdDesc(customerId);
         if (order != null && !order.getPayment().isPaid()){
-            return modelMapper.convertOrderDTO(order);
+            OrderDTO orderDTO = modelMapper.convertOrderDTO(order);
+            orderDTO.setTotalItem(orderDTO.getOrderItems().size());
+            return orderDTO;
         }
         return null;
     }
@@ -25,9 +27,8 @@ public class OrderService extends BaseService {
     public OrderDTO updateState(OrderDTO orderDTO){
         Order order = orderRepository.findById(orderDTO.getId());
         String state = getState(orderDTO.getState(),order.getState());
-        if (Objects.nonNull(order) && state!=null){
+        if (Objects.nonNull(order) && state != null){
             order.setState(state);
-            log.info(state+"==================================");
             orderRepository.saveAndFlush(order);
             return modelMapper.convertOrderDTO(order);
         }
@@ -35,7 +36,6 @@ public class OrderService extends BaseService {
     }
 
     public String getState(String orderDTO, String order) {
-        log.info(order + "==================================");
         if (orderDTO.equalsIgnoreCase(Util.REJECTED) && !order.equalsIgnoreCase(Util.RECEIVED)) {
             return Util.REJECTED;
         }
