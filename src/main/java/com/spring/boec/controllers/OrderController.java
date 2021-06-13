@@ -35,6 +35,6 @@ public class OrderController {
         if (Objects.nonNull(orderDTO1)){
             return new ResponseEntity<>(new MessageDTO(Util.UPDATED_SUCCESS), HttpStatus.OK);
         }else
-            return new ResponseEntity<>(new MessageDTO(Util.CART_IS_EMPTY), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new MessageDTO(Util.UPDATED_NOT_SUCCESS), HttpStatus.BAD_REQUEST);
     }
 }
