@@ -1,9 +1,11 @@
 package com.spring.boec.services;
 
 import com.spring.boec.dtos.BookDTO;
+import com.spring.boec.dtos.RatingDTO;
 import com.spring.boec.entities.Author;
 import com.spring.boec.entities.Book;
 import com.spring.boec.entities.Publisher;
+import com.spring.boec.entities.Rating;
 import com.spring.boec.mapper.ModelMapper;
 import com.spring.boec.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,8 +71,12 @@ public class BookService extends BaseService {
 
     public BookDTO getBookDTO(int bookId){
         Book book = bookRepository.findById(bookId).orElse(null);
+//        List<Rating> ratings = ratingRepository.findAllByBookId(bookId);
         if (Objects.nonNull(book)){
-            return modelMapper.convertToBookDTO(book);
+            BookDTO bookDTO = modelMapper.convertToBookDTO(book);
+//            List<RatingDTO> ratingDTO = modelMapper.convertListRating(ratings);
+//            bookDTO.setRatings(ratingDTO);
+            return bookDTO;
         }else
             return null;
     }

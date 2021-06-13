@@ -1,8 +1,11 @@
 package com.spring.boec.dtos;
 
+import com.spring.boec.entities.Rating;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,4 +22,5 @@ public class BookDTO {
 
     private PublisherDTO publisher;
 
+    private List<RatingDTO> ratings;
 }
