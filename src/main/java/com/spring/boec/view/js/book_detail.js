@@ -4,6 +4,30 @@ var apiLinkCart='http://localhost:8080/api/v1/order-items';
 var apiLinkGetOrder='http://localhost:8080/api/v1/orders?customer_id='
 var apiRating='http://localhost:8080/api/v1/ratings'
 var idCustomer=1;
+var kt=false;
+var rate=0;
+const ratingStars = [...document.getElementsByClassName("rating__star")];
+
+function executeRating(stars) {
+    const starClassActive = "rating__star fas fa-star";
+    const starClassInactive = "rating__star far fa-star";
+    const starsLength = stars.length;
+    let i;
+    stars.map((star) => {
+        star.onclick = () => {
+            i = stars.indexOf(star);
+            rate=i+1;
+
+            if (star.className===starClassInactive) {
+                for (i; i >= 0; --i) stars[i].className = starClassActive;
+            } else {
+                for (i; i < starsLength; ++i) stars[i].className = starClassInactive;
+            }
+        };
+    });
+}
+executeRating(ratingStars);
+
 function start(){
     console.log(bookId)
     getBook(viewBook)
@@ -88,6 +112,28 @@ function viewBook(book){
                         </div>`;
     document.getElementById("bookView").innerHTML = bookView;
 
+    //view review-----------------
+
+    var listReview=document.querySelector('#listReview');
+    var htmls=book.ratings.map(function(review){
+        return `<div class="reviewer"> ${review.customer.id} - <span>19 June 2021</span></div>
+                                    <div class="ratting">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        
+                                    </div>
+                                    <p>${review.content}</p>`
+    })
+    listReview.innerHTML=htmls.join('');
+
+
+    var reviewSize=`${book.ratings.size()}`;
+    document.getElementById("danhGia").innerHTML = reviewSize;
+
+
 }
 function addToCart(book){
     var option={
@@ -112,31 +158,35 @@ function addAction(bookID){
         }
         addToCart(formData);
 }
+
 function addReview(){
-    var content=document.querySelector('textarea[name="reviewContent"]').value;
-    var rate=5;
     var btnAdd=document.querySelector('#btnAddReview');
-    btnAdd.onclick=function (){
-        var formData={
-            rate : rate,
-            content : content,
-            book : {id : bookId},
-            customer : {id : idCustomer}
+    if (true){
+        btnAdd.onclick=function (){
+            var content=document.getElementById('reviewContent').value;
+            var formData={
+                rate : rate,
+                content : content,
+                book : {id : bookId},
+                customer : {id : idCustomer}
+            }
+
+            var option={
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            };
+            fetch(apiRating,option).then(function (responce){
+                responce.json()
+            }).then(function (){
+                getBook(viewBook);
+                kt=true;
+            });
         }
-
-        var option={
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        };
-        fetch(apiRating,option).then(function (responce){
-            responce.json()
-        }).then(function (){
-
-        });
     }
+
 
 }
 function addAction2(){
@@ -152,5 +202,6 @@ function addAction2(){
         }
         addToCart(formData);
     }
+
 
 }

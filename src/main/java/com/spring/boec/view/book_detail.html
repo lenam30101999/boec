@@ -152,7 +152,7 @@
                                 <a class="nav-link" data-toggle="pill" href="#specification">Specification</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="pill" href="#reviews">Đánh giá (1)</a>
+                                <a class="nav-link" data-toggle="pill" href="#reviews" id="danhGia">Đánh giá (1)</a>
                             </li>
                         </ul>
 
@@ -174,32 +174,36 @@
                                 </ul>
                             </div>
                             <div id="reviews" class="container tab-pane fade">
-                                <div class="reviews-submitted">
-                                    <div class="reviewer">Phasellus Gravida - <span>01 Jan 2020</span></div>
-                                    <div class="ratting">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <p>
-                                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
-                                    </p>
+                                <div class="reviews-submitted" id="listReview">
+<!--                                    <div class="reviewer">Phasellus Gravida - <span>19 June 2021</span></div>-->
+<!--                                    <div class="ratting">-->
+<!--                                        <i class="fa fa-star"></i>-->
+<!--                                        <i class="fa fa-star"></i>-->
+<!--                                        <i class="fa fa-star"></i>-->
+<!--                                        <i class="fa fa-star"></i>-->
+<!--                                        <i class="fa fa-star"></i>-->
+<!--                                    </div>-->
+<!--                                    <p>-->
+<!--                                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.-->
+<!--                                    </p>-->
                                 </div>
+
                                 <div class="reviews-submit">
-                                    <h4>Give your Review:</h4>
+                                    <h4>Đánh giá sản phẩm tại đây:</h4>
                                     <div class="ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
+                                        <div class="rating">
+                                            <i class="rating__star far fa-star"></i>
+                                            <i class="rating__star far fa-star"></i>
+                                            <i class="rating__star far fa-star"></i>
+                                            <i class="rating__star far fa-star"></i>
+                                            <i class="rating__star far fa-star"></i>
+                                        </div>
                                     </div>
                                     <div class="row form">
 
                                         <div class="col-sm-12">
-                                            <textarea name="reviewContent" placeholder="Đánh giá"></textarea>
+                                            <textarea id="reviewContent" placeholder="Đánh giá"></textarea>
+
                                         </div>
                                         <div class="col-sm-12">
                                             <button id="btnAddReview">Gửi</button>
