@@ -32,4 +32,7 @@ public class Order implements Serializable {
 
   @OneToOne(mappedBy = "order")
   private Payment payment;
+
+  @Column(name = "state")
+  private String state;
 }

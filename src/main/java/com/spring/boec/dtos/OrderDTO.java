@@ -23,4 +23,6 @@ public class OrderDTO {
 
     @JsonProperty("order_items")
     private List<OrderItemDTO> orderItems;
+
+    private String state;
 }
