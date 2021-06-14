@@ -1,6 +1,5 @@
 package com.spring.boec.dtos;
 
-import com.spring.boec.entities.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
