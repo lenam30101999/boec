@@ -7,10 +7,7 @@ import com.spring.boec.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
@@ -21,6 +18,7 @@ public class RatingController {
     @Autowired
     private RatingService ratingService;
 
+    @CrossOrigin(origins = "*")
     @PostMapping("add-comment-book")
     public ResponseEntity<?> addCommentBook(@RequestBody RatingDTO ratingDTO){
         RatingDTO ratingDTO1 = ratingService.addCommentBook(ratingDTO);
@@ -31,6 +29,7 @@ public class RatingController {
         return new ResponseEntity<>(new MessageDTO(Util.INSERT_NOT_SUCCESS), HttpStatus.BAD_REQUEST);
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("add-comment-clothes")
     public ResponseEntity<?> addCommentClothes(@RequestBody RatingDTO ratingDTO){
         RatingDTO ratingDTO1 = ratingService.addCommentClothes(ratingDTO);
@@ -41,6 +40,7 @@ public class RatingController {
         return new ResponseEntity<>(new MessageDTO(Util.INSERT_NOT_SUCCESS), HttpStatus.BAD_REQUEST);
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("add-comment-electronic")
     public ResponseEntity<?> addCommentElectronic(@RequestBody RatingDTO ratingDTO){
         RatingDTO ratingDTO1 = ratingService.addCommentElectronic(ratingDTO);

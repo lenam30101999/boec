@@ -1,27 +1,33 @@
-var id=localStorage.getItem('bookID');
+var bookId=localStorage.getItem('bookID');
 var apiLink='http://localhost:8080/api/v1/books/get-book/';
 var apiLinkCart='http://localhost:8080/api/v1/order-items';
 var apiLinkGetOrder='http://localhost:8080/api/v1/orders?customer_id='
+var apiRating='http://localhost:8080/api/v1/ratings'
+var idCustomer=1;
 function start(){
-    console.log(id)
+    console.log(bookId)
     getBook(viewBook)
     // addAction()
-    getOrderCount()
+    getOrderCount(viewOrderCount)
+    addReview()
 }
 start();
-function  getOrderCount(){
-    fetch(apiLinkGetOrder+"1").then(function (responce){
-        var result=responce.json().map(function(){
-
-        });
-
-        console.log(list.length);
-    }).catch(function (err){
+function  getOrderCount(callback){
+    fetch(apiLinkGetOrder+idCustomer).then(function (responce){
+        return responce.json();
+    }).then(callback).catch(function (err){
         console.log(err)
     });
 }
+function viewOrderCount(order){
+
+    var totalOrder=`(${order.total_item})`;
+    console.log(order.total_item);
+
+    document.getElementById("orderCount").innerHTML = totalOrder;
+}
 function  getBook(callback){
-    fetch(apiLink+id).then(function (responce){
+    fetch(apiLink+bookId).then(function (responce){
         return responce.json();
     }).then(callback).catch(function (err){
         console.log(err)
@@ -58,7 +64,7 @@ function viewBook(book){
                                     <h4>Quantity:</h4>
                                     <div class="qty">
                                         <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                        <input type="text" value="1">
+                                        <input type="text" value="1" name="quantity">
                                         <button class="btn-plus"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
@@ -75,13 +81,12 @@ function viewBook(book){
                                 
                                 </div>
                                 <div class="action">
-                                    <a class="btn" onclick="addAction()"><i class="fa fa-shopping-cart"></i>Them vao gio hang</a>
+                                    <a class="btn" onclick="addAction(${book.id})"><i class="fa fa-shopping-cart"></i>Them vao gio hang</a>
                                     <a class="btn" href="#"><i class="fa fa-shopping-bag"></i>Mua ngay</a>
                                 </div>
                             </div>
                         </div>`;
     document.getElementById("bookView").innerHTML = bookView;
-
 
 }
 function addToCart(book){
@@ -94,15 +99,45 @@ function addToCart(book){
     };
     fetch(apiLinkCart,option).then(function (responce){
         responce.json()
+    }).then(function (){
+        getOrderCount(viewOrderCount)
     });
 }
-function addAction(){
+function addAction(bookID){
+    var quantity=document.querySelector('input[name="quantity"]').value;
         var formData={
-            book: {id : "1"},
-            customer_id : 1,
-            quantity : "1"
+            book: {id : bookID},
+            customer_id : idCustomer,
+            quantity : quantity
         }
         addToCart(formData);
+}
+function addReview(){
+    var content=document.querySelector('textarea[name="reviewContent"]').value;
+    var rate=5;
+    var btnAdd=document.querySelector('#btnAddReview');
+    btnAdd.onclick=function (){
+        var formData={
+            rate : rate,
+            content : content,
+            book : {id : bookId},
+            customer : {id : idCustomer}
+        }
+
+        var option={
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        };
+        fetch(apiRating,option).then(function (responce){
+            responce.json()
+        }).then(function (){
+
+        });
+    }
+
 }
 function addAction2(){
     // window.onload = function(){

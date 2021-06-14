@@ -48,7 +48,7 @@ public class OrderService extends BaseService {
         if (orderDTO.equalsIgnoreCase(Util.REJECTED) && !order.equalsIgnoreCase(Util.RECEIVED)) {
             return Util.REJECTED;
         }
-        if (Objects.isNull(order) && orderDTO.equalsIgnoreCase(Util.PENDING)) {
+        if ((Objects.isNull(order) || order.equalsIgnoreCase("")) && orderDTO.equalsIgnoreCase(Util.PENDING)) {
             return Util.PENDING;
         }
         if (Objects.nonNull(order)) {
