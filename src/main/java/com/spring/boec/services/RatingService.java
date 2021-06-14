@@ -34,42 +34,46 @@ public class RatingService extends BaseService{
     }
 
     private Rating addCommentBook(RatingDTO ratingDTO, Customer customer) {
-        Book book = bookRepository.findById(ratingDTO.getBook().getId()).orElse(null);
-        if (Objects.nonNull(book) && Objects.nonNull(customer)) {
-            return Rating.builder()
-                    .rate(ratingDTO.getRate())
-                    .content(ratingDTO.getContent())
-                    .customer(customer)
-                    .book(book)
-                    .build();
+        if (Objects.nonNull(ratingDTO.getBook())){
+            Book book = bookRepository.findById(ratingDTO.getBook().getId()).orElse(null);
+            if (Objects.nonNull(book) && Objects.nonNull(customer)) {
+                return Rating.builder()
+                        .rate(ratingDTO.getRate())
+                        .content(ratingDTO.getContent())
+                        .customer(customer)
+                        .book(book)
+                        .build();
+            }
         }
         return null;
     }
 
     private Rating addCommentClothes(RatingDTO ratingDTO, Customer customer) {
-        Clothes clothes = clothesRepository.findById(ratingDTO.getClothes().getId()).orElse(null);
-        if (Objects.nonNull(clothes) && Objects.nonNull(customer)) {
-            Rating rating = Rating.builder()
-                .rate(ratingDTO.getRate())
-                .content(ratingDTO.getContent())
-                .clothes(clothes)
-                .customer(customer)
-                .build();
-            return rating;
+        if (Objects.nonNull(ratingDTO.getClothes())) {
+            Clothes clothes = clothesRepository.findById(ratingDTO.getClothes().getId()).orElse(null);
+            if (Objects.nonNull(clothes) && Objects.nonNull(customer)) {
+                return Rating.builder()
+                        .rate(ratingDTO.getRate())
+                        .content(ratingDTO.getContent())
+                        .clothes(clothes)
+                        .customer(customer)
+                        .build();
+            }
         }
         return null;
     }
 
     private Rating addCommentElectronic(RatingDTO ratingDTO, Customer customer) {
-        Electronic electronic = electronicRepository.findById(ratingDTO.getElectronic().getId()).orElse(null);
-        if (Objects.nonNull(electronic) && Objects.nonNull(customer)) {
-            Rating rating = Rating.builder()
-                    .rate(ratingDTO.getRate())
-                    .content(ratingDTO.getContent())
-                    .electronic(electronic)
-                    .customer(customer)
-                    .build();
-            return rating;
+        if (Objects.nonNull(ratingDTO.getElectronic())) {
+            Electronic electronic = electronicRepository.findById(ratingDTO.getElectronic().getId()).orElse(null);
+            if (Objects.nonNull(electronic) && Objects.nonNull(customer)) {
+                return Rating.builder()
+                        .rate(ratingDTO.getRate())
+                        .content(ratingDTO.getContent())
+                        .electronic(electronic)
+                        .customer(customer)
+                        .build();
+            }
         }
         return null;
     }
