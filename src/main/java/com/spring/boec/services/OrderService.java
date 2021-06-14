@@ -7,7 +7,9 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Log4j2
 @Service
@@ -35,6 +37,13 @@ public class OrderService extends BaseService {
         return null;
     }
 
+    public List<OrderDTO> findAllOrderPending(){
+        List<Order> orders = orderRepository.findAllByState(Util.PENDING);
+        List<OrderDTO> orderDTOS = convertToOrderDTOs(orders);
+        orderDTOS.forEach(p -> p.setTotalItem(p.getOrderItems().size()));
+        return orderDTOS;
+    }
+
     public String getState(String orderDTO, String order) {
         if (orderDTO.equalsIgnoreCase(Util.REJECTED) && !order.equalsIgnoreCase(Util.RECEIVED)) {
             return Util.REJECTED;
@@ -54,5 +63,9 @@ public class OrderService extends BaseService {
             }
         }
         return null;
+    }
+
+    private List<OrderDTO> convertToOrderDTOs(List<Order> orders){
+        return orders.stream().map(modelMapper::convertOrderDTO).collect(Collectors.toList());
     }
 }
