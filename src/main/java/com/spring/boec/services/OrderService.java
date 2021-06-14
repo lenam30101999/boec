@@ -21,6 +21,9 @@ public class OrderService extends BaseService {
         if (order != null && !order.getPayment().isPaid()){
             OrderDTO orderDTO = modelMapper.convertOrderDTO(order);
             orderDTO.setTotalItem(orderDTO.getOrderItems().size());
+            orderDTO.getOrderItems().stream().filter(p -> p.getClothesDTO() != null).forEach(p -> p.getClothesDTO().setRatings(null));
+            orderDTO.getOrderItems().stream().filter(p -> p.getBookDTO() != null).forEach(p -> p.getBookDTO().setRatings(null));
+            orderDTO.getOrderItems().stream().filter(p -> p.getElectronicDTO() != null).forEach(p -> p.getElectronicDTO().setRatings(null));
             return orderDTO;
         }
         return null;
