@@ -97,6 +97,4 @@ public interface ModelMapper {
           @Mapping(target = "electronic", ignore = true)
   })
   RatingDTO convertToRatingDTO(Rating rating);
-
-
 }
