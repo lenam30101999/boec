@@ -38,6 +38,8 @@ public interface ModelMapper {
   AddressDTO convertToAddressDTO(Address address);
 
   @Mappings({
+          @Mapping(target = "fullName", source = "customer.fullName"),
+          @Mapping(target = "address", source = "customer.address")
   })
   AccountDTO convertToUserDTO(Account account);
 
@@ -55,6 +57,7 @@ public interface ModelMapper {
   @Mappings({
           @Mapping(target = "price", source = "price"),
           @Mapping(target = "stock", source = "stock"),
+          @Mapping(target = "ratings", source = "ratings"),
           @Mapping(target = "avgRating", ignore = true)
 
   })
@@ -63,12 +66,15 @@ public interface ModelMapper {
   @Mappings({
   })
   List<BookDTO> convertToListBook(List<Book> books);
+
   @AfterMapping
-  static void calculateRating(@MappingTarget BookDTO bookDTO, Book book){
+  static void calculateRatingBook(@MappingTarget BookDTO bookDTO, Book book){
     List<Float> rateList = new ArrayList<>();
-    book.getRatings().stream().forEach(p->rateList.add(p.getRate()));
-    float calculate = Helper.calculateRating(rateList);
-    bookDTO.setAvgRating(calculate);
+    if (book.getRatings() != null){
+      book.getRatings().forEach(p -> rateList.add(p.getRate()));
+      float calculate = Helper.calculateRating(rateList);
+      bookDTO.setAvgRating(calculate);
+    }else bookDTO.setAvgRating(0);
   }
 
   @Mappings({
@@ -79,9 +85,32 @@ public interface ModelMapper {
   })
   ElectronicDTO convertToElectronicDTO(Electronic electronic);
 
+  @Mappings({})
+  List<ClothesDTO> convertToListClothesDTO(List<Clothes> clothes);
+
+  @AfterMapping
+  static void calculateRatingClothes(@MappingTarget ClothesDTO clothesDTO, Clothes clothes){
+    List<Float> rateList = new ArrayList<>();
+    if (clothes.getRatings() != null){
+      clothes.getRatings().forEach(p -> rateList.add(p.getRate()));
+      float calculate = Helper.calculateRating(rateList);
+      clothesDTO.setAvgRating(calculate);
+    }else clothesDTO.setAvgRating(0);
+  }
+
   @Mappings({
   })
   List<ElectronicDTO> convertListElectronic(List<Electronic> electronics);
+
+  @AfterMapping
+  static void calculateRatingElectronic(@MappingTarget ElectronicDTO electronicDTO, Electronic electronic){
+    List<Float> rateList = new ArrayList<>();
+    if (electronic.getRatings() != null){
+      electronic.getRatings().forEach(p -> rateList.add(p.getRate()));
+      float calculate = Helper.calculateRating(rateList);
+      electronicDTO.setAvgRating(calculate);
+    }else electronicDTO.setAvgRating(0);
+  }
 
   @Mappings({
   })

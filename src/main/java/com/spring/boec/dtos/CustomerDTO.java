@@ -10,4 +10,6 @@ import lombok.NoArgsConstructor;
 public class CustomerDTO {
 
     private Integer id;
+
+    private FullNameDTO fullName;
 }
