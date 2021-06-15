@@ -46,7 +46,7 @@ public class ClothesService extends BaseService {
 
   public List<ClothesDTO> getAllClothes(){
     List<Clothes> clothes = clothesRepository.findAll();
-    return convertToListClothesDTOs(clothes);
+    return modelMapper.convertToListClothesDTO(clothes);
   }
 
   public ClothesDTO updateClothes(ClothesDTO clothesDTO){
@@ -81,8 +81,8 @@ public class ClothesService extends BaseService {
     List<Float> rateList = new ArrayList<>();
     Clothes clothes = clothesRepository.findById(clothesDTO).orElse(null);
     if (Objects.nonNull(clothes)){
-      clothes.getRatings().stream().forEach(p->rateList.add(p.getRate()));
-      ClothesDTO clothesDTO1 =  modelMapper.convertToClothesDTO(clothes);
+      clothes.getRatings().forEach(p->rateList.add(p.getRate()));
+      ClothesDTO clothesDTO1 = modelMapper.convertToClothesDTO(clothes);
       float calculateRating = Helper.calculateRating(rateList);
       clothesDTO1.setAvgRating(calculateRating);
       return clothesDTO1;
