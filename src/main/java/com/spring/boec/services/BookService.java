@@ -73,8 +73,8 @@ public class BookService extends BaseService {
     public List<BookDTO> getAllBook(){
         List<Book> books = bookRepository.findAll();
         List<BookDTO> bookDTOS = books.stream().map(modelMapper::convertToBookDTO).collect(Collectors.toList());
-       bookDTOS =  bookDTOS.stream().sorted(Comparator.comparingDouble(BookDTO::getAvgRating).reversed()).collect(Collectors.toList());
-       return bookDTOS;
+        bookDTOS = bookDTOS.stream().sorted(Comparator.comparingDouble(BookDTO::getAvgRating).reversed()).collect(Collectors.toList());
+        return bookDTOS;
     }
 
     public BookDTO deleteBookDTO(int bookId){
@@ -90,7 +90,7 @@ public class BookService extends BaseService {
         List<Float> rateList = new ArrayList<>();
         Book book = bookRepository.findById(bookId).orElse(null);
         if (Objects.nonNull(book)){
-            book.getRatings().stream().forEach(p->rateList.add(p.getRate()));
+            book.getRatings().forEach(p -> rateList.add(p.getRate()));
             float calculateRating = Helper.calculateRating(rateList);
             BookDTO bookDTO = modelMapper.convertToBookDTO(book);
             bookDTO.setAvgRating(calculateRating);

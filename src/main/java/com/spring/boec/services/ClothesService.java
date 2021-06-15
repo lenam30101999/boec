@@ -46,7 +46,7 @@ public class ClothesService extends BaseService {
 
   public List<ClothesDTO> getAllClothes(){
     List<Clothes> clothes = clothesRepository.findAll();
-    return convertToListClothesDTOs(clothes);
+    return modelMapper.convertToListClothesDTO(clothes);
   }
 
   public ClothesDTO updateClothes(ClothesDTO clothesDTO){

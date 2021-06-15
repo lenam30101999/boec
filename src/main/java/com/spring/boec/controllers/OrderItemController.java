@@ -20,6 +20,7 @@ public class OrderItemController {
     @Autowired
     private OrderItemService orderItemService;
 
+    @CrossOrigin(origins = "*")
     @PostMapping
     public ResponseEntity<?> addOrderItem(@RequestBody OrderItemDTO orderItemDTO){
         OrderItemDTO saved = orderItemService.addOrderItem(orderItemDTO);
@@ -28,6 +29,7 @@ public class OrderItemController {
         }else return new ResponseEntity<>(new MessageDTO(Util.ADD_NOT_SUCCESS), HttpStatus.BAD_REQUEST);
     }
 
+    @CrossOrigin(origins = "*")
     @PutMapping
     public ResponseEntity<?> editOrderItem(@RequestBody List<OrderItemDTO> orderItemDTOs){
         List<OrderItemDTO> orderItemDTOS = orderItemService.updateOrderItem(orderItemDTOs);
@@ -36,6 +38,7 @@ public class OrderItemController {
         }else return new ResponseEntity<>(new MessageDTO(Util.ADD_NOT_SUCCESS), HttpStatus.BAD_REQUEST);
     }
 
+    @CrossOrigin(origins = "*")
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> deleteOrderItem(@PathVariable("id") int id){
         OrderItemDTO orderItemDTO = orderItemService.deleteOrderItem(id);
