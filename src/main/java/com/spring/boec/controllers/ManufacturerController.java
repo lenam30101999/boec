@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/api/manufacturer/")
+@RequestMapping("/api/manufacturers/")
 public class ManufacturerController {
 
     @Autowired
