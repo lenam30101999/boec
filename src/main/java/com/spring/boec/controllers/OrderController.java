@@ -20,6 +20,7 @@ public class OrderController {
 
     @Autowired private OrderService orderService;
 
+    @CrossOrigin(origins = "*")
     @GetMapping(params = "customer_id")
     public ResponseEntity<?> getByCustomer(@RequestParam("customer_id") int customerId){
         OrderDTO orderDTO = orderService.getOrderByCustomer(customerId);
@@ -29,6 +30,7 @@ public class OrderController {
             return new ResponseEntity<>(new MessageDTO(Util.CART_IS_EMPTY), HttpStatus.BAD_REQUEST);
     }
 
+    @CrossOrigin(origins = "*")
     @PutMapping
     public ResponseEntity<?> updateState(@RequestBody OrderDTO orderDTO){
         OrderDTO orderDTO1 = orderService.updateState(orderDTO);
@@ -38,6 +40,7 @@ public class OrderController {
             return new ResponseEntity<>(new MessageDTO(Util.UPDATED_NOT_SUCCESS), HttpStatus.BAD_REQUEST);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping()
     public ResponseEntity<?> findAllOrderPending(){
         List<OrderDTO> orderDTOS = orderService.findAllOrderPending();

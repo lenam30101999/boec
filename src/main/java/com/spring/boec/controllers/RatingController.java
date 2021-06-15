@@ -7,10 +7,7 @@ import com.spring.boec.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
@@ -21,6 +18,7 @@ public class RatingController {
     @Autowired
     private RatingService ratingService;
 
+    @CrossOrigin(origins = "*")
     @PostMapping
     public ResponseEntity<?> addRatingAndComment(@RequestBody RatingDTO ratingDTO){
         RatingDTO ratingDTO1 = ratingService.addRatingAndComment(ratingDTO);
