@@ -126,4 +126,16 @@ public interface ModelMapper {
           @Mapping(target = "electronic", ignore = true)
   })
   RatingDTO convertToRatingDTO(Rating rating);
+
+  @Mappings({
+  })
+  List<AuthorDTO> convertListAuthor(List<Author> authors);
+
+  @Mappings({
+  })
+  List<PublisherDTO> convertListPublisher(List<Publisher> publishers);
+
+  @Mappings({
+  })
+  List<ManuFacturerDTO> convertListManufacturer(List<Manufacturer> manufacturers);
 }
