@@ -117,7 +117,7 @@ function viewBook(book){
     var listReview=document.querySelector('#listReview');
     var htmls=book.ratings.map(function(review){
         return `<div class="reviewer"> ${review.customer.id} - <span>19 June 2021</span></div>
-                                    <div class="ratting">
+                                    <div class="ratting" id="star-${review.id}">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -133,8 +133,16 @@ function viewBook(book){
     var reviewSize=`${book.ratings.size()}`;
     document.getElementById("danhGia").innerHTML = reviewSize;
 
+    window.onload=function (){
+        var viewStar=`<i class="fa fa-star"></i>`;
+        console.log(book.ratings.id)
+        for(var i = 0; i < rating.length; i++){
+            document.getElementById("star-"+rating.id).innerHTML = viewStar;
+        }
 
+    }
 }
+
 function addToCart(book){
     var option={
         method: 'POST',
