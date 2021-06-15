@@ -17,14 +17,8 @@ import java.util.Objects;
 
 @Log4j2
 @Service
-@Transactional
-public class AccountService {
-
-  @Autowired
-  private AccountRepository accountRepository;
-
-  @Autowired
-  private ModelMapper modelMapper;
+//@Transactional
+public class AccountService extends BaseService {
 
   public String checkLogin(AccountDTO accountDTO){
     if (accountDTO.getUsername().equals("")) {
@@ -50,33 +44,38 @@ public class AccountService {
 
   public AccountDTO signup(AccountDTO accountDTO) {
     try {
-      Address address = Address.builder()
-          .street(accountDTO.getAddress().getStreet())
-          .city(accountDTO.getAddress().getCity())
-          .build();
+      Account account = accountRepository.findUserByUsernameIgnoreCase(accountDTO.getUsername());
+      if (Objects.isNull(account)){
+        Address address = Address.builder()
+                .street(accountDTO.getAddress().getStreet())
+                .city(accountDTO.getAddress().getCity())
+                .build();
 
-      FullName fullName = FullName.builder()
-          .firstName(accountDTO.getFullName().getFirstName())
-          .middleName(accountDTO.getFullName().getMiddleName())
-          .lastName(accountDTO.getFullName().getLastName())
-          .build();
+        FullName fullName = FullName.builder()
+                .firstName(accountDTO.getFullName().getFirstName())
+                .middleName(accountDTO.getFullName().getMiddleName())
+                .lastName(accountDTO.getFullName().getLastName())
+                .build();
 
-      Customer customer = Customer.builder()
-          .address(address)
-          .fullName(fullName)
-          .build();
+        Customer customer = Customer.builder()
+                .address(address)
+                .fullName(fullName)
+                .build();
 
-      Account account = Account.builder()
-          .username(accountDTO.getUsername())
-          .password(accountDTO.getPassword())
-          .phoneNo(accountDTO.getPhoneNo())
-          .gender(accountDTO.getGender())
-          .role(accountDTO.getRole())
-          .customer(customer)
-          .build();
+        Account saved = Account.builder()
+                .username(accountDTO.getUsername())
+                .password(accountDTO.getPassword())
+                .phoneNo(accountDTO.getPhoneNo())
+                .gender(accountDTO.getGender())
+                .role(accountDTO.getRole())
+                .customer(customer)
+                .build();
 
-      account = accountRepository.save(account);
-      return modelMapper.convertToUserDTO(account);
+        log.info(saved);
+
+        saved = accountRepository.save(saved);
+        return modelMapper.convertToUserDTO(saved);
+      }else return null;
     }catch (Exception e){
       log.error(e);
     }

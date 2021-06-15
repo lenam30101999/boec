@@ -19,12 +19,21 @@ public class ClothesController {
   @Autowired
   private ClothesService clothesService;
 
-  @GetMapping()
-  private ResponseEntity<?> getAllClothes(@RequestParam("textSearch") String textSearch){
-    List<ClothesDTO> clothesDTOList  = clothesService.getListClothes(textSearch);
+  @CrossOrigin(origins = "*")
+  @GetMapping(params = "textSearch")
+  private ResponseEntity<?> getAllClothesBySearch(@RequestParam("textSearch") String textSearch){
+    List<ClothesDTO> clothesDTOList = clothesService.getListClothes(textSearch);
     return new ResponseEntity<>(clothesDTOList, HttpStatus.OK);
   }
 
+  @CrossOrigin(origins = "*")
+  @GetMapping()
+  private ResponseEntity<?> getAllClothes(){
+    List<ClothesDTO> clothesDTOList = clothesService.getAllClothes();
+    return new ResponseEntity<>(clothesDTOList, HttpStatus.OK);
+  }
+
+  @CrossOrigin(origins = "*")
   @PostMapping("/add-clothes")
   private ResponseEntity<?> addClothes(@RequestBody ClothesDTO clothesDTO){
     ClothesDTO clothesDTO1 = clothesService.addClothes(clothesDTO);
@@ -36,24 +45,27 @@ public class ClothesController {
     }
   }
 
+  @CrossOrigin(origins = "*")
   @PutMapping("/update-clothes")
   private ResponseEntity<?> updateClothes(@RequestBody ClothesDTO clothesDTO){
     ClothesDTO clothesDTO1 = clothesService.updateClothes((clothesDTO));
     return new ResponseEntity<>(clothesDTO1, HttpStatus.OK);
   }
 
+  @CrossOrigin(origins = "*")
   @DeleteMapping("/delete-clothes/{clothesId}")
   private ResponseEntity<?> deleteClothes(@PathVariable("clothesId") int clothesId){
     ClothesDTO clothesDTO = clothesService.deleteClothesDTO(clothesId);
     return new ResponseEntity<>(clothesDTO, HttpStatus.OK);
   }
 
+  @CrossOrigin(origins = "*")
   @GetMapping("/get-clothes/{clothesId}")
   private ResponseEntity<?> getClothes(@PathVariable("clothesId") int clothesId){
     ClothesDTO clothesDTO = clothesService.getClothesDTO(clothesId);
     if (Objects.nonNull(clothesDTO)) {
       return new ResponseEntity<>(clothesDTO, HttpStatus.OK);
     }else
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND.getReasonPhrase(),HttpStatus.NOT_FOUND);
+      return new ResponseEntity<>(new MessageDTO(Util.NOT_FOUND), HttpStatus.NOT_FOUND);
   }
 }

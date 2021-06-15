@@ -1,28 +1,29 @@
 package com.spring.boec.services;
 
 import com.spring.boec.dtos.BookDTO;
+import com.spring.boec.dtos.RatingDTO;
 import com.spring.boec.entities.Author;
 import com.spring.boec.entities.Book;
 import com.spring.boec.entities.Publisher;
+import com.spring.boec.entities.Rating;
 import com.spring.boec.mapper.ModelMapper;
 import com.spring.boec.repositories.BookRepository;
+import com.spring.boec.utils.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @Service
 @Transactional
-public class BookService {
-
-    @Autowired
-    private ModelMapper modelMapper;
-
-    @Autowired
-    private BookRepository bookRepository;
+public class BookService extends BaseService {
 
     public BookDTO addBook(BookDTO bookDTO){
         Author author = Author.builder()
@@ -37,6 +38,11 @@ public class BookService {
                 .publisher(publisher)
                 .pageCount(bookDTO.getPageCount())
                 .build();
+        book.setStock(bookDTO.getStock());
+        book.setUrlImage(bookDTO.getUrlImage());
+        book.setPrice(bookDTO.getPrice());
+
+        bookRepository.save(book);
         return modelMapper.convertToBookDTO(book);
     }
 
@@ -55,12 +61,20 @@ public class BookService {
                 .build();
         if (Objects.nonNull(book)){
             book.setName(bookDTO.getName());
+            book.setUrlImage(bookDTO.getUrlImage());
             book.setPageCount(bookDTO.getPageCount());
             book.setAuthor(author);
             book.setPublisher(publisher);
             bookRepository.saveAndFlush(book);
         }
         return modelMapper.convertToBookDTO(book);
+    }
+
+    public List<BookDTO> getAllBook(){
+        List<Book> books = bookRepository.findAll();
+        List<BookDTO> bookDTOS = books.stream().map(modelMapper::convertToBookDTO).collect(Collectors.toList());
+       bookDTOS =  bookDTOS.stream().sorted(Comparator.comparingDouble(BookDTO::getAvgRating).reversed()).collect(Collectors.toList());
+       return bookDTOS;
     }
 
     public BookDTO deleteBookDTO(int bookId){
@@ -73,9 +87,14 @@ public class BookService {
     }
 
     public BookDTO getBookDTO(int bookId){
+        List<Float> rateList = new ArrayList<>();
         Book book = bookRepository.findById(bookId).orElse(null);
         if (Objects.nonNull(book)){
-            return modelMapper.convertToBookDTO(book);
+            book.getRatings().stream().forEach(p->rateList.add(p.getRate()));
+            float calculateRating = Helper.calculateRating(rateList);
+            BookDTO bookDTO = modelMapper.convertToBookDTO(book);
+            bookDTO.setAvgRating(calculateRating);
+            return bookDTO;
         }else
             return null;
     }

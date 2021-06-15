@@ -30,8 +30,6 @@ public class FullName implements Serializable {
     @Column(name = "last_name")
     private String lastName;
 
-    @MapsId
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "id")
+    @OneToOne(mappedBy = "fullName")
     private Customer customer;
 }

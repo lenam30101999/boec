@@ -1,20 +1,26 @@
 package com.spring.boec.dtos;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ElectronicDTO {
 
-    private int id;
+    private Integer id;
 
     private long price;
 
     private int stock;
+
+    @JsonProperty("url_image")
+    private String urlImage;
 
     private int power;
 
@@ -23,4 +29,9 @@ public class ElectronicDTO {
     private ManuFacturerDTO manufacturer;
 
     private PublisherDTO publisher;
+
+    private List<RatingDTO> ratings;
+
+    @JsonProperty("avg_rating")
+    private float avgRating;
 }
