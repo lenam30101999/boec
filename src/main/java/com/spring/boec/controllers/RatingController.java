@@ -15,35 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/api/v1/rating/")
+@RequestMapping("/api/v1/ratings")
 public class RatingController {
 
     @Autowired
     private RatingService ratingService;
 
-    @PostMapping("add-comment-book")
-    public ResponseEntity<?> addCommentBook(@RequestBody RatingDTO ratingDTO){
-        RatingDTO ratingDTO1 = ratingService.addCommentBook(ratingDTO);
-
-        if (Objects.nonNull(ratingDTO1)){
-            return new ResponseEntity<>(new MessageDTO(Util.ADD_SUCCESS), HttpStatus.CREATED);
-        }
-        return new ResponseEntity<>(new MessageDTO(Util.INSERT_NOT_SUCCESS), HttpStatus.BAD_REQUEST);
-    }
-
-    @PostMapping("add-comment-clothes")
-    public ResponseEntity<?> addCommentClothes(@RequestBody RatingDTO ratingDTO){
-        RatingDTO ratingDTO1 = ratingService.addCommentClothes(ratingDTO);
-
-        if (Objects.nonNull(ratingDTO1)){
-            return new ResponseEntity<>(new MessageDTO(Util.ADD_SUCCESS), HttpStatus.CREATED);
-        }
-        return new ResponseEntity<>(new MessageDTO(Util.INSERT_NOT_SUCCESS), HttpStatus.BAD_REQUEST);
-    }
-
-    @PostMapping("add-comment-electronic")
-    public ResponseEntity<?> addCommentElectronic(@RequestBody RatingDTO ratingDTO){
-        RatingDTO ratingDTO1 = ratingService.addCommentElectronic(ratingDTO);
+    @PostMapping
+    public ResponseEntity<?> addRatingAndComment(@RequestBody RatingDTO ratingDTO){
+        RatingDTO ratingDTO1 = ratingService.addRatingAndComment(ratingDTO);
 
         if (Objects.nonNull(ratingDTO1)){
             return new ResponseEntity<>(new MessageDTO(Util.ADD_SUCCESS), HttpStatus.CREATED);

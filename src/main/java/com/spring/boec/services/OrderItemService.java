@@ -1,7 +1,9 @@
 package com.spring.boec.services;
 
+import com.spring.boec.dtos.OrderDTO;
 import com.spring.boec.dtos.OrderItemDTO;
 import com.spring.boec.entities.*;
+import com.spring.boec.utils.Util;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +20,7 @@ public class OrderItemService extends BaseService {
     public OrderItemDTO addOrderItem(OrderItemDTO orderItemDTO){
         Order order = orderRepository.findTopByCustomerIdOrderByIdDesc(orderItemDTO.getCustomerId());
         OrderItem orderItem;
-        if (Objects.nonNull(order) && !order.getPayment().isPaid()){
+        if (Objects.nonNull(order) && !order.getPayment().isPaid() && Objects.isNull(order.getState())){
             Map<String, Object> map = getOrderItem(orderItemDTO);
             orderItem = (OrderItem) map.get("object");
             long price = (long) map.get("price");
@@ -48,7 +50,7 @@ public class OrderItemService extends BaseService {
         List<OrderItem> orderItems = order.getOrderItems();
         Payment payment = order.getPayment();
 
-        if (!payment.isPaid()){
+        if (!payment.isPaid() && Objects.isNull(order.getState())){
             for (OrderItemDTO orderItemDTO : orderItemDTOs){
                 OrderItem updated = orderItemRepository.findById(orderItemDTO.getId()).orElse(null);
                 if (Objects.nonNull(updated)){
