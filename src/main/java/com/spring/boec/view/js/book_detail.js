@@ -3,7 +3,7 @@ var apiLink='http://localhost:8080/api/v1/books/get-book/';
 var apiLinkCart='http://localhost:8080/api/v1/order-items';
 var apiLinkGetOrder='http://localhost:8080/api/v1/orders?customer_id='
 var apiRating='http://localhost:8080/api/v1/ratings'
-var idCustomer=1;
+var idCustomer=sessionStorage.getItem("userID");
 var kt=false;
 var rate=0;
 const ratingStars = [...document.getElementsByClassName("rating__star")];
@@ -156,17 +156,17 @@ function viewBook(book){
 
 
 
-    var reviewSize=`${book.ratings.size()}`;
-    document.getElementById("danhGia").innerHTML = reviewSize;
+    // var reviewSize=`${book.ratings.size()}`;
+    // document.getElementById("danhGia").innerHTML = reviewSize;
 
-    window.onload=function (){
-        var viewStar=`<i class="fa fa-star"></i>`;
-        console.log(book.ratings.id)
-        for(var i = 0; i < rating.length; i++){
-            document.getElementById("star-"+rating.id).innerHTML = viewStar;
-        }
-
-    }
+    // window.onload=function (){
+    //     var viewStar=`<i class="fa fa-star"></i>`;
+    //     console.log(book.ratings.id)
+    //     for(var i = 0; i < rating.length; i++){
+    //         document.getElementById("star-"+rating.id).innerHTML = viewStar;
+    //     }
+    //
+    // }
 }
 
 function addToCart(book){
@@ -215,9 +215,10 @@ function addReview(){
             fetch(apiRating,option).then(function (responce){
                 responce.json()
             }).then(function (){
-                getBook(viewBook);
+
                 kt=true;
             });
+            getBook(viewBook);
         }
     }
 

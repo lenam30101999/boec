@@ -1,4 +1,4 @@
-var apiLink='http://localhost:8080/api/v1/books?textSearch';
+var apiLink='http://localhost:8080/api/v1/electronics?textSearch';
 // var id=urlParams.get('id');
 var customerName=sessionStorage.getItem("userName");
 var customerID=sessionStorage.getItem("userID");
@@ -15,7 +15,7 @@ function  getAllBook(callback){
     });
 }
 function viewAllBook(books){
-    var listBook=document.querySelector('#listBook');
+    var listBook=document.querySelector('#listElectro');
     var htmls=books.map(function(book){
         var result1=`<div class="col-lg-3" >
                 <div class="product-item">
@@ -46,7 +46,7 @@ function viewAllBook(books){
                     </div>
                     <div class="product-price">
                         <h3>${book.price}<span>VND</span></h3>
-                        <a class="btn" onclick="viewBook(${book.id})"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                        <a class="btn" onclick="viewClothes(${book.id})"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
                     </div>
                 </div>
             </div>`;
@@ -54,20 +54,8 @@ function viewAllBook(books){
     })
     listBook.innerHTML=htmls.join('');
 
-    var listBook2=document.querySelector('#listSlibar');
-    var htmls2=books.map(function(book){
-        return `<div class="header-slider-item">
-                        <img src="${book.url_image}" alt="Slider Image"  width='400' height='400'/>
-                        <div class="header-slider-caption">
-                            <p>${book.name}</p>
-                            <a class="btn" onclick="viewBook(${book.id})"><i class="fa fa-shopping-cart"></i>View Now</a>
-                        </div>
-                    </div>`;
-    })
-    listBook2.innerHTML=htmls2.join('');
-
 }
-function viewBook(id){
-    localStorage.setItem('bookID',id);
-    window.location.href = './book_detail.html';
+function viewClothes(id){
+    localStorage.setItem('electroID',id);
+    window.location.href = './electro_detail.html';
 }

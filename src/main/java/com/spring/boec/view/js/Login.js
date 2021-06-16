@@ -1,6 +1,7 @@
 var Login = (function () {
     // $('#add_name').val();
     var initial = function () {
+        sessionStorage.setItem("userID","");
         console.log("initial")
         bindEvent();
         bindRegister()
@@ -17,12 +18,18 @@ var Login = (function () {
                 contentType: 'application/json',
                 dataType: "json",
                 success: function (result) {
-                    if (result.role === "STUDENT") {
-                        window.location.href = '../html/BangDiemCaNhanToanKhoa.html';
-                        sessionStorage.setItem("user", JSON.stringify(result));
-                    } else if (result.role === "LECTURER") {
-                        window.location.href = '../html/trangChuSqa.html';
-                        sessionStorage.setItem("user", JSON.stringify(result));
+                    if (result.role === "user") {
+
+                        window.location.href = './customer_view.html';
+                        sessionStorage.setItem("userName", result.fullName.firstName+" "+
+                                    result.fullName.middleName+" "+result.fullName.lastName);
+                        sessionStorage.setItem("userID", result.id);
+
+                    } else if (result.role === "admin") {
+                        window.location.href = './admin.html';
+                        sessionStorage.setItem("userName", result.fullName.firstName+" "+
+                            result.fullName.middleName+" "+result.fullName.lastName);
+                        sessionStorage.setItem("userID", result.id);
                     } else {
                         $.ajax({
                             url: 'http://localhost:8080/api/v1/users/getAllStudent',
@@ -97,7 +104,7 @@ var Login = (function () {
                                 console.log(error);
                             }
                         });
-                        window.location.href = 'index.html';
+                        window.location.href = 'customer_view.html';
                         sessionStorage.setItem("user", JSON.stringify(result));
                     },
                 error: function (error) {
