@@ -137,30 +137,46 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>First Name</label>
-                                    <input class="form-control" type="text" placeholder="First Name">
+                                    <input class="form-control" type="text" placeholder="First Name" name="firstName">
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Middle Name</label>
+                                    <input class="form-control" type="text" placeholder="Middle Name" name="middleName">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Last Name"</label>
-                                    <input class="form-control" type="text" placeholder="Last Name">
+                                    <input class="form-control" type="text" placeholder="Last Name" name="lastName">
                                 </div>
                                 <div class="col-md-6">
-                                    <label>E-mail</label>
-                                    <input class="form-control" type="text" placeholder="E-mail">
+                                    <label>Username</label>
+                                    <input class="form-control" type="text" placeholder="Username" name="registerUsername">
                                 </div>
                                 <div class="col-md-6">
-                                    <label>Mobile No</label>
-                                    <input class="form-control" type="text" placeholder="Mobile No">
+                                    <label>Phone No</label>
+                                    <input class="form-control" type="text" placeholder="Phone No" name="phone">
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Gender</label>
+                                    <input class="form-control" type="text" placeholder="Gender" name="gender">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Password</label>
-                                    <input class="form-control" type="text" placeholder="Password">
+                                    <input class="form-control" type="text" placeholder="Password" name="registerPassword">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Retype Password</label>
-                                    <input class="form-control" type="text" placeholder="Password">
+                                    <input class="form-control" type="text" placeholder="Password" name="confirmPassword">
+                                </div>
+                                <div class="col-md-6">
+                                    <label>City</label>
+                                    <input class="form-control" type="text" placeholder="City" name="city">
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Street</label>
+                                    <input class="form-control" type="text" placeholder="Street" name="street">
                                 </div>
                                 <div class="col-md-12">
-                                    <button class="btn">Submit</button>
+                                    <button class="btn" id="register">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -170,11 +186,11 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>E-mail / Username</label>
-                                    <input class="form-control" type="text" placeholder="E-mail / Username">
+                                    <input class="form-control" type="text" placeholder="E-mail / Username" name="username">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Password</label>
-                                    <input class="form-control" type="text" placeholder="Password">
+                                    <input class="form-control" type="text" placeholder="Password" name="password">
                                 </div>
                                 <div class="col-md-12">
                                     <div class="custom-control custom-checkbox">
@@ -183,7 +199,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <button class="btn">Submit</button>
+                                    <button class="btn" id="login">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -286,12 +302,13 @@
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
         
         <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
         <script src="lib/easing/easing.min.js"></script>
         <script src="lib/slick/slick.min.js"></script>
         
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <script src="js/Login.js"></script>
     </body>
 </html>
