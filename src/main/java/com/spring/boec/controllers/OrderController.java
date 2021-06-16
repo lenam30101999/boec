@@ -46,4 +46,11 @@ public class OrderController {
         List<OrderDTO> orderDTOS = orderService.findAllOrderPending();
         return new ResponseEntity<>(orderDTOS, HttpStatus.OK);
     }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping(path = "/all")
+    public ResponseEntity<?> findAllOrder(){
+        List<OrderDTO> orderDTOS = orderService.findAllOrder();
+        return new ResponseEntity<>(orderDTOS, HttpStatus.OK);
+    }
 }
