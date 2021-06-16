@@ -47,6 +47,14 @@ public class OrderService extends BaseService {
         return orderDTOS;
     }
 
+    public List<OrderDTO> findAllOrder(){
+        List<Order> orders = orderRepository.findAllByOrderByState();
+        orders.removeIf(p -> (p.getState() == null || p.getState().equals("")));
+        List<OrderDTO> orderDTOS = convertToOrderDTOs(orders);
+        orderDTOS.forEach(p -> p.setTotalItem(p.getOrderItems().size()));
+        return orderDTOS;
+    }
+
     public String getState(String orderDTO, String order) {
         if (orderDTO.equalsIgnoreCase(Util.REJECTED) && !order.equalsIgnoreCase(Util.RECEIVED)) {
             return Util.REJECTED;
