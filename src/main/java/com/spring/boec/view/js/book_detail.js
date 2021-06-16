@@ -114,20 +114,46 @@ function viewBook(book){
 
     //view review-----------------
 
+    // var listReview=document.querySelector('#listReview');
+    // var htmls=book.ratings.map(function(review){
+    //     return `<div class="reviewer"> ${review.customer.id} - <span>19 June 2021</span></div>
+    //                                 <div class="ratting" id="star-${review.id}">
+    //                                     <i class="fa fa-star"></i>
+    //                                     <i class="fa fa-star"></i>
+    //                                     <i class="fa fa-star"></i>
+    //                                     <i class="fa fa-star"></i>
+    //                                     <i class="fa fa-star"></i>
+    //
+    //                                 </div>
+    //                                 <p>${review.content}</p>`
+    // })
+    // listReview.innerHTML=htmls.join('');
+
+
+
+
     var listReview=document.querySelector('#listReview');
     var htmls=book.ratings.map(function(review){
-        return `<div class="reviewer"> ${review.customer.id} - <span>19 June 2021</span></div>
-                                    <div class="ratting" id="star-${review.id}">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        
-                                    </div>
-                                    <p>${review.content}</p>`
+        var ok=`<div class="reviewer"> ${review.customer.fullName.firstName} ${review.customer.fullName.middleName} 
+                                        ${review.customer.fullName.lastName}- 
+                        <span>19 June 2021</span></div>
+                                    <div class="ratting" id="star-${review.id}"><i class="fa fa-star-half-empty"></i> `;
+        var ok1=``;
+        for (var i=0;i<review.rate;i++){
+            ok1+=`<i class="fa fa-star"></i>`;
+        }
+        for (var i=review.rate;i<5;i++){
+            ok1+=`<i class="far fa-star"></i>`;
+        }
+
+        var ok2=` </div>
+                  <p>${review.content}</p>`
+
+
+        return ok+ok1+ok2;
     })
     listReview.innerHTML=htmls.join('');
+
 
 
     var reviewSize=`${book.ratings.size()}`;
