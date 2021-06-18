@@ -36,7 +36,7 @@ function viewAllBook(books){
         var result3=`</div></div>
                     <div class="product-image">
                         <a href="product-detail.html">
-                            <img src="${book.url_image}" alt="Product Image">
+                            <img src="${book.url_image}" alt="Product Image" width='400' height='400'>
                         </a>
                         <div class="product-action">
                             <a href="#"><i class="fa fa-cart-plus"></i></a>
@@ -46,7 +46,7 @@ function viewAllBook(books){
                     </div>
                     <div class="product-price">
                         <h3>${book.price}<span>VND</span></h3>
-                        <a class="btn" onclick="viewBook(${book.id})"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                        <a class="btn" onclick="viewBook(${book.id})"><i class="fa fa-shopping-cart"></i>View now</a>
                     </div>
                 </div>
             </div>`;
@@ -64,7 +64,7 @@ function viewAllBook(books){
                         </div>
                     </div>`;
     })
-    listBook2.innerHTML=htmls2.join('');
+    // listBook2.innerHTML=htmls2.join('');
 
 }
 function viewBook(id){

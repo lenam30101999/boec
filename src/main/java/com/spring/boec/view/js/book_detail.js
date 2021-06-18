@@ -93,44 +93,33 @@ function viewBook(book){
                                     </div>
                                 </div>
                                 <div class="p-size">
-                                    <h4>So trang: ${book.page_Count}</h4>
+                                    <h4>Page: ${book.page_count}</h4>
                                 
                                 </div>
                                 <div class="p-color">
-                                    <h4>Tac gia:${book.author.name}</h4>
+                                    <h4>Author:${book.author.name}</h4>
                                     
                                 </div>
                                 <div class="p-size">
-                                    <h4>Con lai: ${book.stock}</h4>
+                                    <h4>Stock: ${book.stock}</h4>
                                 
                                 </div>
                                 <div class="action">
-                                    <a class="btn" onclick="addAction(${book.id})"><i class="fa fa-shopping-cart"></i>Them vao gio hang</a>
-                                    <a class="btn" href="#"><i class="fa fa-shopping-bag"></i>Mua ngay</a>
+                                    <a class="btn" onclick="addAction(${book.id})"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+<!--                                    <a class="btn" href="#"><i class="fa fa-shopping-bag"></i>Mua ngay</a>-->
                                 </div>
                             </div>
                         </div>`;
     document.getElementById("bookView").innerHTML = bookView;
 
-    //view review-----------------
 
-    // var listReview=document.querySelector('#listReview');
-    // var htmls=book.ratings.map(function(review){
-    //     return `<div class="reviewer"> ${review.customer.id} - <span>19 June 2021</span></div>
-    //                                 <div class="ratting" id="star-${review.id}">
-    //                                     <i class="fa fa-star"></i>
-    //                                     <i class="fa fa-star"></i>
-    //                                     <i class="fa fa-star"></i>
-    //                                     <i class="fa fa-star"></i>
-    //                                     <i class="fa fa-star"></i>
-    //
-    //                                 </div>
-    //                                 <p>${review.content}</p>`
-    // })
-    // listReview.innerHTML=htmls.join('');
+    //book descriptin
 
-
-
+    var description=`Publisher: ${book.publisher.name}, adrress: ${book.publisher.address}
+    <br>
+        Author: ${book.author.name}`;
+    document.getElementById("description").innerHTML = description;
+    // view reviewer=============
 
     var listReview=document.querySelector('#listReview');
     var htmls=book.ratings.map(function(review){
@@ -154,19 +143,6 @@ function viewBook(book){
     })
     listReview.innerHTML=htmls.join('');
 
-
-
-    // var reviewSize=`${book.ratings.size()}`;
-    // document.getElementById("danhGia").innerHTML = reviewSize;
-
-    // window.onload=function (){
-    //     var viewStar=`<i class="fa fa-star"></i>`;
-    //     console.log(book.ratings.id)
-    //     for(var i = 0; i < rating.length; i++){
-    //         document.getElementById("star-"+rating.id).innerHTML = viewStar;
-    //     }
-    //
-    // }
 }
 
 function addToCart(book){
@@ -215,10 +191,9 @@ function addReview(){
             fetch(apiRating,option).then(function (responce){
                 responce.json()
             }).then(function (){
-
+                start();
                 kt=true;
             });
-            getBook(viewBook);
         }
     }
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>E Store - eCommerce HTML Template</title>
+    <title>BOEC Store</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="eCommerce HTML Template Free Download" name="keywords">
     <meta content="eCommerce HTML Template Free Download" name="description">
@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <i class="fa fa-envelope"></i>
-                support@email.com
+                nhom4@email.com
             </div>
             <div class="col-sm-6">
                 <i class="fa fa-phone-alt"></i>
@@ -52,26 +52,18 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="product-list.html" class="nav-item nav-link">Products</a>
-                    <a href="product-detail.html" class="nav-item nav-link active">Product Detail</a>
+                    <a href="customer_view.html" class="nav-item nav-link active">Home</a>
+                    <a href="customer_view.html" class="nav-item nav-link">Book</a>
+                    <a href="customer_view.html" class="nav-item nav-link">Electro</a>
                     <a href="cart.html" class="nav-item nav-link">Cart</a>
-                    <a href="checkout.html" class="nav-item nav-link">Checkout</a>
                     <a href="my-account.html" class="nav-item nav-link">My Account</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
-                        <div class="dropdown-menu">
-                            <a href="wishlist.html" class="dropdown-item">Wishlist</a>
-                            <a href="login.html" class="dropdown-item">Login & Register</a>
-                            <a href="contact.html" class="dropdown-item">Contact Us</a>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="navbar-nav ml-auto">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="username">User Account</a>
                         <div class="dropdown-menu">
-                            <a href="login1.html" class="dropdown-item">Đăng xuất</a>
+                            <a href="login1.html" class="dropdown-item">Logout</a>
 
                         </div>
                     </div>
@@ -88,32 +80,19 @@
         <div class="row align-items-center">
             <div class="col-md-3">
                 <div class="logo">
-                    <a href="index.html">
+                    <a href=".html">
                         <img src="img/logo.png" alt="Logo">
                     </a>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="search">
-                    <input type="text" placeholder="Search">
-                    <button><i class="fa fa-search"></i></button>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="user">
-                    <a href="wishlist.html" class="btn wishlist">
-                        <i class="fa fa-heart"></i>
-                        <span>(0)</span>
-                    </a>
-                    <a href="cart.html" class="btn cart">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span id="orderCount">(0)</span>
-                    </a>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
+
+
+
+
 <!-- Bottom Bar End -->
 
 <!-- Breadcrumb Start -->
@@ -140,25 +119,25 @@
 <div class="recent-product product">
     <div class="container-fluid">
         <div class="section-header">
+
+            <h2>BOOK ITEM</h2>
             <div class="col-md-6">
                 <a class="btn btn-success" href="addBook.html">Add new Book</a>
             </div>
-
-            <h1>Danh sach</h1>
-
+            <br>
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th>Ảnh</th>
+                    <th>Image</th>
                     <th>ID</th>
-                    <th>Tên</th>
-                    <th>Số trang</th>
-                    <th>Giá</th>
-                    <th>Còn lại</th>
-                    <th>Tác giả</th>
-                    <th>Nhà xuất bản</th>
-                    <th>Đánh giá</th>
-                    <th>Hành động</th>
+                    <th>Name</th>
+                    <th>Page</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Author</th>
+                    <th>Publisher</th>
+                    <th>Rating</th>
+                    <th>Action</th>
                 </tr>
 
                 </thead>
@@ -169,6 +148,84 @@
                     <td>Doe</td>
                     <td>john@example.com</td>
                 </tr>
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+<div class="recent-product product">
+    <div class="container-fluid">
+        <div class="section-header">
+
+            <h2>ELECTRONIC ITEM</h2>
+            <div class="col-md-6">
+                <a class="btn btn-success" href="addBook.html">Add new Electro</a>
+            </div>
+            <br>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Image</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Power</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Manufacturer</th>
+                    <th>Publisher</th>
+                    <th>Rating</th>
+                    <th>Action</th>
+                </tr>
+
+                </thead>
+                <tbody id="listElectro">
+
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+<div class="recent-product product">
+    <div class="container-fluid">
+        <div class="section-header">
+
+            <h2>CLOTHES ITEM</h2>
+            <div class="col-md-6">
+                <a class="btn btn-success" href="addBook.html">Add new Clothes</a>
+            </div>
+            <br>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Image</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Page</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Gender</th>
+                    <th>Publisher</th>
+                    <th>Rating</th>
+                    <th>Action</th>
+                </tr>
+
+                </thead>
+                <tbody id="listClothes">
+
 
 
                 </tbody>

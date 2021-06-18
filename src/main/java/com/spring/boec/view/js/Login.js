@@ -45,7 +45,7 @@ var Login = (function () {
                                 console.log(error);
                             }
                         });
-                        window.location.href = 'index.html';
+                        window.location.href = 'customer_view.html';
                         sessionStorage.setItem("user", JSON.stringify(result));
                     }
                     sessionStorage.setItem("user", JSON.stringify(result));

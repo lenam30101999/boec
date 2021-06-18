@@ -1,4 +1,6 @@
 var apiLink='http://localhost:8080/api/v1/books?textSearch';
+var apiElectro='http://localhost:8080/api/v1/electronics?textSearch';
+var apiClothes='http://localhost:8080/api/v1/clothes?textSearch';
 var apiAddBook='http://localhost:8080/api/v1/books/add-book';
 var apiDeleteBook='http://localhost:8080//api/v1/books/delete-book/';
 var apiUpdateBook='localhost:8080//api/v1/books/update-book';
@@ -12,6 +14,8 @@ function start(){
     getAdmin();
 
     getAllBook(viewAllBook)
+    getAllElectro(viewAllElectro)
+    getAllClothes(viewAllClothes)
     addBook()
 
 }
@@ -107,6 +111,65 @@ function  getBook(callback){
 function updateBook(id){
     localStorage.setItem('bookID',id);
     window.location.href = './updateBook.html';
+
+}
+
+function  getAllElectro(callback){
+    fetch(apiElectro).then(function (responce){
+        return responce.json();
+    }).then(callback).catch(function (err){
+        console.log(err)
+    });
+}
+function viewAllElectro(books){
+    var listBook=document.querySelector('#listElectro');
+    var htmls=books.map(function(book){
+        return `<tr>
+                    <td><img src=${book.url_image} alt=“image” width='150' height='150'></td>
+                    <td>${book.id}</td>
+                    <td>${book.name}</td>
+                    <td>${book.power}</td>
+                    <td>${book.price}</td>
+                    <td>${book.stock}</td>
+                    <td>${book.manufacturer.name}</td>
+                    <td>${book.publisher.name}</td>
+                    <td>${book.avg_rating}</td>
+                    <td>
+                        <a class="btn btn-danger" onclick="deleteBook(${book.id})">Delete</a>
+                        <a class="btn btn-secondary" onclick="updateBook(${book.id})">Update</a>
+                    </td>
+                </tr>`;
+    })
+    listBook.innerHTML=htmls.join('');
+
+}
+function  getAllClothes(callback){
+    fetch(apiClothes).then(function (responce){
+        return responce.json();
+    }).then(callback).catch(function (err){
+        console.log(err)
+    });
+}
+function viewAllClothes(books){
+    var listBook=document.querySelector('#listClothes');
+    var htmls=books.map(function(book){
+        return `<tr>
+                    <td><img src=${book.url_image} alt=“image” width='150' height='150'></td>
+                    <td>${book.id}</td>
+                    <td>${book.name}</td>
+                    <td>${book.size}</td>
+                    <td>${book.price}</td>
+                    <td>${book.stock}</td>
+                    <td>${book.gender}</td>
+                    <td>${book.publisher.name}</td>
+                    <td>${book.avg_rating}</td>
+                    <td>
+                        <a class="btn btn-danger" onclick="deleteBook(${book.id})">Delete</a>
+                        <a class="btn btn-secondary" onclick="updateBook(${book.id})">Update</a>
+                    </td>
+                </tr>`;
+    })
+    listBook.innerHTML=htmls.join('');
 
 }
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>E Store - eCommerce HTML Template</title>
+    <title>BOEC Store</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="eCommerce HTML Template Free Download" name="keywords">
     <meta content="eCommerce HTML Template Free Download" name="description">
@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <i class="fa fa-envelope"></i>
-                support@email.com
+                nhom4@email.com
             </div>
             <div class="col-sm-6">
                 <i class="fa fa-phone-alt"></i>
@@ -52,27 +52,19 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="product-list.html" class="nav-item nav-link">Products</a>
-                    <a href="product-detail.html" class="nav-item nav-link">Product Detail</a>
+                    <a href="customer_view.html" class="nav-item nav-link active">Home</a>
+                    <a href="customer_view.html" class="nav-item nav-link">Book</a>
+                    <a href="customer_view.html" class="nav-item nav-link">Electro</a>
                     <a href="cart.html" class="nav-item nav-link">Cart</a>
-                    <a href="checkout.html" class="nav-item nav-link">Checkout</a>
                     <a href="my-account.html" class="nav-item nav-link">My Account</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">More Pages</a>
-                        <div class="dropdown-menu">
-                            <a href="wishlist.html" class="dropdown-item">Wishlist</a>
-                            <a href="login.html" class="dropdown-item active">Login & Register</a>
-                            <a href="contact.html" class="dropdown-item">Contact Us</a>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="navbar-nav ml-auto">
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="username">User Account</a>
                         <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Login</a>
-                            <a href="#" class="dropdown-item">Register</a>
+                            <a href="login1.html" class="dropdown-item">Logout</a>
+
                         </div>
                     </div>
                 </div>
@@ -88,29 +80,12 @@
         <div class="row align-items-center">
             <div class="col-md-3">
                 <div class="logo">
-                    <a href="index.html">
+                    <a href="customer_view.html">
                         <img src="img/logo.png" alt="Logo">
                     </a>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="search">
-                    <input type="text" placeholder="Search">
-                    <button><i class="fa fa-search"></i></button>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="user">
-                    <a href="wishlist.html" class="btn wishlist">
-                        <i class="fa fa-heart"></i>
-                        <span>(0)</span>
-                    </a>
-                    <a href="cart.html" class="btn cart">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span>(0)</span>
-                    </a>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
@@ -120,9 +95,8 @@
 <div class="breadcrumb-wrap">
     <div class="container-fluid">
         <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Products</a></li>
-            <li class="breadcrumb-item active">Login & Register</li>
+            <li class="breadcrumb-item"><a href="#">Admin</a></li>
+            <li class="breadcrumb-item active">Add book</li>
         </ul>
     </div>
 </div>
@@ -137,31 +111,31 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label>Name</label>
-                            <input class="form-control" type="text" placeholder="First Name" id="bookName">
+                            <input class="form-control" type="text" placeholder="" id="bookName">
                         </div>
                         <div class="col-md-6">
                             <label>Stock</label>
-                            <input class="form-control" type="text" placeholder="Middle Name" id="stock">
+                            <input class="form-control" type="text" placeholder="" id="stock">
                         </div>
                         <div class="col-md-6">
                             <label>Price:</label>
-                            <input class="form-control" type="text" placeholder="Last Name" id="price">
+                            <input class="form-control" type="text" placeholder="" id="price">
                         </div>
                         <div class="col-md-6">
                             <label>Image URL:</label>
-                            <input class="form-control" type="text" placeholder="Username" id="image">
+                            <input class="form-control" type="text" placeholder="" id="image">
                         </div>
                         <div class="col-md-6">
                             <label>Page count: </label>
-                            <input class="form-control" type="text" placeholder="Phone No" id="page">
+                            <input class="form-control" type="text" placeholder="" id="page">
                         </div>
                         <div class="col-md-6">
                             <label>Author ID</label>
-                            <input class="form-control" type="text" placeholder="Gender" id="author">
+                            <input class="form-control" type="text" placeholder="" id="author">
                         </div>
                         <div class="col-md-6">
                             <label>Publisher ID</label>
-                            <input class="form-control" type="text" placeholder="Password" id="publisher">
+                            <input class="form-control" type="text" placeholder="" id="publisher">
                         </div>
 
                         <div class="col-md-12">
