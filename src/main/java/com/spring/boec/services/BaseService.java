@@ -21,4 +21,5 @@ public class BaseService {
     @Autowired protected AuthorRepository authorRepository;
     @Autowired protected PublisherRepository publisherRepository;
     @Autowired protected ManufacturerRepository manufacturerRepository;
+    @Autowired protected ProductFavoriteRepository productFavoriteRepository;
 }
