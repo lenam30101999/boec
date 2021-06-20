@@ -38,4 +38,7 @@ public class Book extends Item {
 
     @OneToMany(mappedBy = "book")
     private List<Rating> ratings;
+
+    @OneToMany(mappedBy = "book")
+    private List<ProductFavorite> productFavorites;
 }

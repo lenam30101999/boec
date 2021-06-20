@@ -11,6 +11,14 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ModelMapper {
 
+  @Mappings({
+          @Mapping(target = "id", source = "id"),
+          @Mapping(target = "bookDTO", source = "book"),
+          @Mapping(target = "clothesDTO", source = "clothes"),
+          @Mapping(target = "electronicDTO", source = "electronic")
+  })
+  FavoriteDTO convertToFavoriteDTO(ProductFavorite productFavorite);
+
   @Mappings({})
   PaymentDTO convertToPaymentDTO(Payment payment);
 
