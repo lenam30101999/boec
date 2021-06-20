@@ -16,7 +16,7 @@ function  getAllBook(callback){
 function viewAllBook(books){
     var listBook=document.querySelector('#listBook');
     var htmls=books.map(function(book){
-        var result1=`<div class="col-md-4">
+        var result1=`<div class="row"><div class="col-md-4">
                             <div class="product-item">
                                 <div class="product-title">
                                     <a href="#">${book.name}</a>
@@ -49,7 +49,7 @@ function viewAllBook(books){
                         <a class="btn" onclick="viewBook(${book.id})"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
                     </div>
                 </div>
-            </div>`;
+            </div></div>`;
         return result1+result2+result3;
     })
     listBook.innerHTML=htmls.join('');

@@ -4,7 +4,6 @@ var apiLinkCart='http://localhost:8080/api/v1/order-items';
 var apiLinkGetOrder='http://localhost:8080/api/v1/orders?customer_id='
 var apiRating='http://localhost:8080/api/v1/ratings'
 var idCustomer=sessionStorage.getItem("userID");
-var kt=false;
 var rate=0;
 const ratingStars = [...document.getElementsByClassName("rating__star")];
 
@@ -171,32 +170,29 @@ function addAction(bookID){
 
 function addReview(){
     var btnAdd=document.querySelector('#btnAddReview');
-    if (true){
-        btnAdd.onclick=function (){
-            var content=document.getElementById('reviewContent').value;
-            var formData={
-                rate : rate,
-                content : content,
-                book : {id : bookId},
-                customer : {id : idCustomer}
+        btnAdd.onclick=function () {
+            var content = document.getElementById('reviewContent').value;
+            var formData = {
+                rate: rate,
+                content: content,
+                book: {id: bookId},
+                customer: {id: idCustomer}
             }
 
-            var option={
+            var option = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formData)
             };
-            fetch(apiRating,option).then(function (responce){
+            fetch(apiRating, option).then(function (responce) {
                 responce.json()
-            }).then(function (){
-                start();
-                kt=true;
+            }).then(function () {
+                getBook(viewBook);
+
             });
         }
-    }
-
 
 }
 function addAction2(){
