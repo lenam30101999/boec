@@ -2,6 +2,7 @@ var Login = (function () {
     // $('#add_name').val();
     var initial = function () {
         sessionStorage.setItem("userID","");
+        sessionStorage.setItem("adminID","");
         console.log("initial")
         bindEvent();
         bindRegister()
@@ -29,7 +30,7 @@ var Login = (function () {
                         window.location.href = './admin.html';
                         sessionStorage.setItem("userName", result.fullName.firstName+" "+
                             result.fullName.middleName+" "+result.fullName.lastName);
-                        sessionStorage.setItem("userID", result.id);
+                        sessionStorage.setItem("adminID", result.id);
                     } else {
                         $.ajax({
                             url: 'http://localhost:8080/api/v1/users/getAllStudent',

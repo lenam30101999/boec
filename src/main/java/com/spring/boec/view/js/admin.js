@@ -5,7 +5,7 @@ var apiAddBook='http://localhost:8080/api/v1/books/add-book';
 var apiDeleteBook='http://localhost:8080//api/v1/books/delete-book/';
 var apiUpdateBook='localhost:8080//api/v1/books/update-book';
 var adminName=sessionStorage.getItem("userName");
-var adminID=sessionStorage.getItem("userID");
+var adminID=sessionStorage.getItem("adminID");
 function start(){
     if (adminID=="" || adminID==null) {
         window.location.href = './login1.html';
