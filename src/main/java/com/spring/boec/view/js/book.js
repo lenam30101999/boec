@@ -1,4 +1,5 @@
 var apiLink='http://localhost:8080/api/v1/books?textSearch';
+var apiAddFavorite='http://localhost:8080/api/v1/favorites';
 // var id=urlParams.get('id');
 var customerName=sessionStorage.getItem("userName");
 var customerID=sessionStorage.getItem("userID");
@@ -21,7 +22,7 @@ function viewAllBook(books){
                 <div class="product-item">
                     <div class="product-title">
                         <a onclick="viewBook(${book.id})">${book.name}</a>
-                        <div class="ratting"> ${book.avg_rating}`;
+                        <div class="ratting"> <a>${book.avg_rating}</a>`;
 
         var result2=``;
         var avg=parseInt(book.avg_rating);
@@ -39,9 +40,9 @@ function viewAllBook(books){
                             <img src="${book.url_image}" alt="Product Image" width='400' height='400'>
                         </a>
                         <div class="product-action">
-                            <a href="#"><i class="fa fa-cart-plus"></i></a>
-                            <a href="#"><i class="fa fa-heart"></i></a>
-                            <a href="#"><i class="fa fa-search"></i></a>
+                            <a href="cart.html"><i class="fa fa-cart-plus"></i></a>
+                            <a onclick="addFavorite(${book.id})"><i class="fa fa-heart"></i></a>
+                            
                         </div>
                     </div>
                     <div class="product-price">
@@ -54,6 +55,7 @@ function viewAllBook(books){
     })
     listBook.innerHTML=htmls.join('');
 
+        // slibar=======
     var listBook2=document.querySelector('#listSlibar');
     var htmls2=books.map(function(book){
         return `<div class="header-slider-item">
@@ -66,6 +68,27 @@ function viewAllBook(books){
     })
     // listBook2.innerHTML=htmls2.join('');
 
+}
+function addFavorite(id){
+    var formData={
+       book : {
+           id : id
+       },
+        customer_id : customerID
+    }
+
+    var option={
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    };
+    fetch(apiAddFavorite,option).then(function (responce){
+        responce.json()
+    }).then(function (){
+        
+    });
 }
 function viewBook(id){
     localStorage.setItem('bookID',id);

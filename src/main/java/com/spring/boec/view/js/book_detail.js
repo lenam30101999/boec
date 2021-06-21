@@ -3,6 +3,7 @@ var apiLink='http://localhost:8080/api/v1/books/get-book/';
 var apiLinkCart='http://localhost:8080/api/v1/order-items';
 var apiLinkGetOrder='http://localhost:8080/api/v1/orders?customer_id='
 var apiRating='http://localhost:8080/api/v1/ratings'
+var apiAddFavorite='http://localhost:8080/api/v1/favorites';
 var idCustomer=sessionStorage.getItem("userID");
 var rate=0;
 const ratingStars = [...document.getElementsByClassName("rating__star")];
@@ -105,6 +106,7 @@ function viewBook(book){
                                 </div>
                                 <div class="action">
                                     <a class="btn" onclick="addAction(${book.id})"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                    <a class="btn wishlist" onclick="addFavorite(${book.id})"><i class="fa fa-heart"></i><span>Add to WishList</span></a>
 <!--                                    <a class="btn" href="#"><i class="fa fa-shopping-bag"></i>Mua ngay</a>-->
                                 </div>
                             </div>
@@ -195,9 +197,30 @@ function addReview(){
         }
 
 }
+function addFavorite(id){
+    var formData={
+        book : {
+            id : id
+        },
+        customer_id : customerID
+    }
+
+    var option={
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    };
+    fetch(apiAddFavorite,option).then(function (responce){
+        responce.json()
+    }).then(function (){
+        getFavoriteCount(viewFavoriteCount);
+    });
+}
 function addAction2(){
     // window.onload = function(){
-    //     // your code
+    //
     // };
     var btnAdd=document.querySelector('#btnAdd');
     btnAdd.onclick=function (){

@@ -15,15 +15,15 @@ function  getAllBook(callback){
 }
 function viewAllBook(books){
     var listBook=document.querySelector('#listBook');
-    var htmls=books.map(function(book){
+    var htmls=books.map(function(favorite){
         var result1=`<div class="row"><div class="col-md-4">
                             <div class="product-item">
                                 <div class="product-title">
-                                    <a href="#">${book.name}</a>
+                                    <a href="#">${favorite.book.name}</a>
                                     <div class="ratting">`;
 
         var result2=``;
-        var avg=parseInt(book.avg_rating);
+        var avg=parseInt(favorite.book.avg_rating);
 
         for (var i=0;i<avg;i++){
             result2+=`<i class="fa fa-star"></i>`;
@@ -36,7 +36,7 @@ function viewAllBook(books){
                                 </div>
                                 <div class="product-image">
                                     <a href="product-detail.html">
-                                        <img src="${book.url_image}" alt="Product Image">
+                                        <img src="${favorite.book.url_image}" alt="Product Image">
                                     </a>
                                     <div class="product-action">
                                         <a href="#"><i class="fa fa-cart-plus"></i></a>
@@ -45,8 +45,8 @@ function viewAllBook(books){
                                     </div>
                                 </div>
                                 <div class="product-price">
-                        <h3>${book.price}<span>VND</span></h3>
-                        <a class="btn" onclick="viewBook(${book.id})"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                        <h3>${favorite.book.price}<span>VND</span></h3>
+                        <a class="btn" onclick="viewBook(${favorite.book.id})"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
                     </div>
                 </div>
             </div></div>`;
