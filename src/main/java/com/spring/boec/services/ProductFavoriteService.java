@@ -90,4 +90,14 @@ public class ProductFavoriteService extends BaseService {
         }
         return null;
     }
+    public FavoriteDTO deleteFavoriteItem(int id){
+        ProductFavorite productFavorite = productFavoriteRepository.findById(id).orElse(null);
+        if (Objects.nonNull(productFavorite)){
+
+                productFavoriteRepository.delete(productFavorite);
+            return modelMapper.convertToFavoriteDTO(productFavorite);
+        }
+        return null;
+
+    }
 }

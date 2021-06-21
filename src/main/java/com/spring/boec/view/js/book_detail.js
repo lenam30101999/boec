@@ -3,8 +3,8 @@ var apiLink='http://localhost:8080/api/v1/books/get-book/';
 var apiLinkCart='http://localhost:8080/api/v1/order-items';
 var apiLinkGetOrder='http://localhost:8080/api/v1/orders?customer_id='
 var apiRating='http://localhost:8080/api/v1/ratings'
-var idCustomer=1;
-var kt=false;
+var apiAddFavorite='http://localhost:8080/api/v1/favorites';
+var idCustomer=sessionStorage.getItem("userID");
 var rate=0;
 const ratingStars = [...document.getElementsByClassName("rating__star")];
 
@@ -93,54 +93,57 @@ function viewBook(book){
                                     </div>
                                 </div>
                                 <div class="p-size">
-                                    <h4>So trang: ${book.page_Count}</h4>
+                                    <h4>Page: ${book.page_count}</h4>
                                 
                                 </div>
                                 <div class="p-color">
-                                    <h4>Tac gia:${book.author.name}</h4>
+                                    <h4>Author:${book.author.name}</h4>
                                     
                                 </div>
                                 <div class="p-size">
-                                    <h4>Con lai: ${book.stock}</h4>
+                                    <h4>Stock: ${book.stock}</h4>
                                 
                                 </div>
                                 <div class="action">
-                                    <a class="btn" onclick="addAction(${book.id})"><i class="fa fa-shopping-cart"></i>Them vao gio hang</a>
-                                    <a class="btn" href="#"><i class="fa fa-shopping-bag"></i>Mua ngay</a>
+                                    <a class="btn" onclick="addAction(${book.id})"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                    <a class="btn wishlist" onclick="addFavorite(${book.id})"><i class="fa fa-heart"></i><span>Add to WishList</span></a>
+<!--                                    <a class="btn" href="#"><i class="fa fa-shopping-bag"></i>Mua ngay</a>-->
                                 </div>
                             </div>
                         </div>`;
     document.getElementById("bookView").innerHTML = bookView;
 
-    //view review-----------------
+
+    //book descriptin
+
+    var description=`Publisher: ${book.publisher.name}, adrress: ${book.publisher.address}
+    <br>
+        Author: ${book.author.name}`;
+    document.getElementById("description").innerHTML = description;
+    // view reviewer=============
 
     var listReview=document.querySelector('#listReview');
     var htmls=book.ratings.map(function(review){
-        return `<div class="reviewer"> ${review.customer.id} - <span>19 June 2021</span></div>
-                                    <div class="ratting" id="star-${review.id}">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        
-                                    </div>
-                                    <p>${review.content}</p>`
+        var ok=`<div class="reviewer"> ${review.customer.fullName.firstName} ${review.customer.fullName.middleName} 
+                                        ${review.customer.fullName.lastName}- 
+                        <span>19 June 2021</span></div>
+                                    <div class="ratting" id="star-${review.id}"><i class="fa fa-star-half-empty"></i> `;
+        var ok1=``;
+        for (var i=0;i<review.rate;i++){
+            ok1+=`<i class="fa fa-star"></i>`;
+        }
+        for (var i=review.rate;i<5;i++){
+            ok1+=`<i class="far fa-star"></i>`;
+        }
+
+        var ok2=` </div>
+                  <p>${review.content}</p>`
+
+
+        return ok+ok1+ok2;
     })
     listReview.innerHTML=htmls.join('');
 
-
-    var reviewSize=`${book.ratings.size()}`;
-    document.getElementById("danhGia").innerHTML = reviewSize;
-
-    window.onload=function (){
-        var viewStar=`<i class="fa fa-star"></i>`;
-        console.log(book.ratings.id)
-        for(var i = 0; i < rating.length; i++){
-            document.getElementById("star-"+rating.id).innerHTML = viewStar;
-        }
-
-    }
 }
 
 function addToCart(book){
@@ -169,37 +172,55 @@ function addAction(bookID){
 
 function addReview(){
     var btnAdd=document.querySelector('#btnAddReview');
-    if (true){
-        btnAdd.onclick=function (){
-            var content=document.getElementById('reviewContent').value;
-            var formData={
-                rate : rate,
-                content : content,
-                book : {id : bookId},
-                customer : {id : idCustomer}
+        btnAdd.onclick=function () {
+            var content = document.getElementById('reviewContent').value;
+            var formData = {
+                rate: rate,
+                content: content,
+                book: {id: bookId},
+                customer: {id: idCustomer}
             }
 
-            var option={
+            var option = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formData)
             };
-            fetch(apiRating,option).then(function (responce){
+            fetch(apiRating, option).then(function (responce) {
                 responce.json()
-            }).then(function (){
+            }).then(function () {
                 getBook(viewBook);
-                kt=true;
+
             });
         }
+
+}
+function addFavorite(id){
+    var formData={
+        book : {
+            id : id
+        },
+        customer_id : customerID
     }
 
-
+    var option={
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    };
+    fetch(apiAddFavorite,option).then(function (responce){
+        responce.json()
+    }).then(function (){
+        getFavoriteCount(viewFavoriteCount);
+    });
 }
 function addAction2(){
     // window.onload = function(){
-    //     // your code
+    //
     // };
     var btnAdd=document.querySelector('#btnAdd');
     btnAdd.onclick=function (){

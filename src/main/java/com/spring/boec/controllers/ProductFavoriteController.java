@@ -2,6 +2,8 @@ package com.spring.boec.controllers;
 
 import com.spring.boec.dtos.FavoriteDTO;
 import com.spring.boec.dtos.MessageDTO;
+import com.spring.boec.dtos.OrderItemDTO;
+import com.spring.boec.entities.ProductFavorite;
 import com.spring.boec.services.ProductFavoriteService;
 import com.spring.boec.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +33,13 @@ public class ProductFavoriteController {
     public ResponseEntity<?> getAllByCustomer(@RequestParam("customer_id") int customerId){
         List<FavoriteDTO> favoriteDTOs = productFavoriteService.getAllByCustomer(customerId);
         return new ResponseEntity<>(favoriteDTOs, HttpStatus.OK);
+    }
+    @CrossOrigin(origins = "*")
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<?> deleteFavoriteItem(@PathVariable("id") int id){
+        FavoriteDTO favoriteDTO = productFavoriteService.deleteFavoriteItem(id);
+        if (favoriteDTO != null){
+            return new ResponseEntity<>(new MessageDTO(Util.DELETE_SUCCESS), HttpStatus.OK);
+        }else return new ResponseEntity<>(new MessageDTO(Util.ADD_NOT_SUCCESS), HttpStatus.BAD_REQUEST);
     }
 }

@@ -2,6 +2,7 @@ var apiLinkGetOrder='http://localhost:8080/api/v1/orders?customer_id='
 var apiDelete='http://localhost:8080/api/v1/order-items/'
 var apiState='http://localhost:8080/api/v1/orders'
 var apiPayment='http://localhost:8080/api/v1/payments/'
+var idCustomer=sessionStorage.getItem("userID");
 var idOrder
 var state
 function start(){
@@ -13,7 +14,7 @@ start();
 
 
 function  getOrder(callback){
-    fetch(apiLinkGetOrder+"1").then(function (responce){
+    fetch(apiLinkGetOrder+idCustomer).then(function (responce){
         return responce.json();
     }).then(callback).catch(function (err){
         console.log(err)
@@ -52,7 +53,7 @@ function viewOrder(order){
     document.getElementById("totalPrice").innerHTML = bookView;
     document.getElementById("totalPrice2").innerHTML = bookView;
     if (order.state!=null && order.state!=""){
-        var stateView=`Trạng thái: ${order.state}`;
+        var stateView=`State: ${order.state}`;
         document.getElementById("stateView").innerHTML = stateView;
     }
 
@@ -95,7 +96,7 @@ function addState(){
                 getOrder(viewOrder);
             });
         }else{
-            if(confirm('Xác nhận thanh toán?')){
+            if(confirm('Confim Payment?')){
                 var option={
                     method: 'PUT',
                     headers: {
@@ -105,7 +106,7 @@ function addState(){
                 fetch(apiPayment+idOrder,option).then(function (responce){
                     responce.json()
                 }).then(function (){
-                    alert('Thanh toán thành công!');
+                    alert('Payment success!');
                     window.location.href = './customer_view.html';
                 });
             }
