@@ -1,8 +1,8 @@
 package com.spring.boec.services.product;
 
 import com.spring.boec.dtos.ClothesDTO;
-import com.spring.boec.entities.product.Clothes;
-import com.spring.boec.entities.product.Publisher;
+import com.spring.boec.model.product.Clothes;
+import com.spring.boec.model.product.Publisher;
 import com.spring.boec.services.BaseService;
 import com.spring.boec.utils.Helper;
 import lombok.extern.log4j.Log4j2;

@@ -1,9 +1,9 @@
-package com.spring.boec.entities.order;
+package com.spring.boec.model.order;
 
-import com.spring.boec.entities.product.Book;
-import com.spring.boec.entities.product.Clothes;
-import com.spring.boec.entities.product.Electronic;
-import com.spring.boec.entities.user.Customer;
+import com.spring.boec.model.product.Book;
+import com.spring.boec.model.product.Clothes;
+import com.spring.boec.model.product.Electronic;
+import com.spring.boec.model.user.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

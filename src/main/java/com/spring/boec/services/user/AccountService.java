@@ -1,10 +1,10 @@
 package com.spring.boec.services.user;
 
 import com.spring.boec.dtos.AccountDTO;
-import com.spring.boec.entities.user.Account;
-import com.spring.boec.entities.user.Address;
-import com.spring.boec.entities.user.Customer;
-import com.spring.boec.entities.user.FullName;
+import com.spring.boec.model.user.Account;
+import com.spring.boec.model.user.Address;
+import com.spring.boec.model.user.Customer;
+import com.spring.boec.model.user.FullName;
 import com.spring.boec.services.BaseService;
 import com.spring.boec.utils.Util;
 import lombok.extern.log4j.Log4j2;

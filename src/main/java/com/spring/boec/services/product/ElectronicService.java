@@ -1,9 +1,9 @@
 package com.spring.boec.services.product;
 
 import com.spring.boec.dtos.ElectronicDTO;
-import com.spring.boec.entities.product.Manufacturer;
-import com.spring.boec.entities.product.Electronic;
-import com.spring.boec.entities.product.Publisher;
+import com.spring.boec.model.product.Manufacturer;
+import com.spring.boec.model.product.Electronic;
+import com.spring.boec.model.product.Publisher;
 import com.spring.boec.services.BaseService;
 import com.spring.boec.utils.Helper;
 import org.springframework.stereotype.Service;

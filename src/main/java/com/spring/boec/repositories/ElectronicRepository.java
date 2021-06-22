@@ -1,6 +1,6 @@
 package com.spring.boec.repositories;
 
-import com.spring.boec.entities.product.Electronic;
+import com.spring.boec.model.product.Electronic;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

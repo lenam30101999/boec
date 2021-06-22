@@ -1,4 +1,4 @@
-package com.spring.boec.entities.user;
+package com.spring.boec.model.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

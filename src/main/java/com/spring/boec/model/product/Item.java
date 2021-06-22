@@ -1,4 +1,4 @@
-package com.spring.boec.entities.product;
+package com.spring.boec.model.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

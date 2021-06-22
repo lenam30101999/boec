@@ -1,13 +1,13 @@
 package com.spring.boec.services.orderItem;
 
 import com.spring.boec.dtos.OrderItemDTO;
-import com.spring.boec.entities.order.Order;
-import com.spring.boec.entities.order.Payment;
-import com.spring.boec.entities.orderItem.OrderItem;
-import com.spring.boec.entities.product.Book;
-import com.spring.boec.entities.product.Clothes;
-import com.spring.boec.entities.product.Electronic;
-import com.spring.boec.entities.user.Customer;
+import com.spring.boec.model.order.Order;
+import com.spring.boec.model.order.Payment;
+import com.spring.boec.model.orderItem.OrderItem;
+import com.spring.boec.model.product.Book;
+import com.spring.boec.model.product.Clothes;
+import com.spring.boec.model.product.Electronic;
+import com.spring.boec.model.user.Customer;
 import com.spring.boec.services.BaseService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;

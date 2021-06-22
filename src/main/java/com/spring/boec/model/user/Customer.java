@@ -1,10 +1,10 @@
-package com.spring.boec.entities.user;
+package com.spring.boec.model.user;
 
 
-import com.spring.boec.entities.order.Order;
-import com.spring.boec.entities.order.Payment;
-import com.spring.boec.entities.product.ProductFavorite;
-import com.spring.boec.entities.order.Rating;
+import com.spring.boec.model.order.Order;
+import com.spring.boec.model.order.Payment;
+import com.spring.boec.model.product.ProductFavorite;
+import com.spring.boec.model.order.Rating;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

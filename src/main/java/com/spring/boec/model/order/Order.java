@@ -1,7 +1,7 @@
-package com.spring.boec.entities.order;
+package com.spring.boec.model.order;
 
-import com.spring.boec.entities.orderItem.OrderItem;
-import com.spring.boec.entities.user.Customer;
+import com.spring.boec.model.orderItem.OrderItem;
+import com.spring.boec.model.user.Customer;
 import lombok.*;
 
 import javax.persistence.*;

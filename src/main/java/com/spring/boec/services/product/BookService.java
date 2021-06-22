@@ -1,9 +1,9 @@
 package com.spring.boec.services.product;
 
 import com.spring.boec.dtos.BookDTO;
-import com.spring.boec.entities.user.Author;
-import com.spring.boec.entities.product.Book;
-import com.spring.boec.entities.product.Publisher;
+import com.spring.boec.model.user.Author;
+import com.spring.boec.model.product.Book;
+import com.spring.boec.model.product.Publisher;
 import com.spring.boec.services.BaseService;
 import com.spring.boec.utils.Helper;
 import org.springframework.stereotype.Service;

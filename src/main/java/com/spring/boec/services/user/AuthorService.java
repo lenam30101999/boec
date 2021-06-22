@@ -1,7 +1,7 @@
 package com.spring.boec.services.user;
 
 import com.spring.boec.dtos.AuthorDTO;
-import com.spring.boec.entities.user.Author;
+import com.spring.boec.model.user.Author;
 import com.spring.boec.services.BaseService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

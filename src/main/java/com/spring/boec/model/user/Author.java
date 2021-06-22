@@ -1,22 +1,23 @@
-package com.spring.boec.entities.product;
+package com.spring.boec.model.user;
 
 
-import com.spring.boec.entities.product.Electronic;
+import com.spring.boec.model.product.Book;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "manufacturer")
+@Table(name = "author")
 @Builder
-public class Manufacturer {
+public class Author implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +26,6 @@ public class Manufacturer {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "address")
-    private String address;
-
-    @OneToMany(mappedBy = "manufacturer")
-    private List<Electronic> electronics;
-
+    @OneToMany(mappedBy = "author")
+    private List<Book> books;
 }

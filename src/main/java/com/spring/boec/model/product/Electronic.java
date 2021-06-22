@@ -1,7 +1,7 @@
-package com.spring.boec.entities.product;
+package com.spring.boec.model.product;
 
-import com.spring.boec.entities.order.Rating;
-import com.spring.boec.entities.orderItem.OrderItem;
+import com.spring.boec.model.order.Rating;
+import com.spring.boec.model.orderItem.OrderItem;
 import lombok.*;
 
 import javax.persistence.*;

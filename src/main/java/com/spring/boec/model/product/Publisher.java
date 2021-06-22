@@ -1,8 +1,5 @@
-package com.spring.boec.entities.product;
+package com.spring.boec.model.product;
 
-import com.spring.boec.entities.product.Book;
-import com.spring.boec.entities.product.Clothes;
-import com.spring.boec.entities.product.Electronic;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

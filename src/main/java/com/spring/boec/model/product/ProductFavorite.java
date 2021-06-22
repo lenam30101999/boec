@@ -1,22 +1,18 @@
-package com.spring.boec.entities.orderItem;
+package com.spring.boec.model.product;
 
-import com.spring.boec.entities.order.Order;
-import com.spring.boec.entities.product.Book;
-import com.spring.boec.entities.product.Clothes;
-import com.spring.boec.entities.product.Electronic;
+import com.spring.boec.model.user.Customer;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "order_item")
+@Table(name = "product_favorite")
 @Builder
 @ToString
-public class OrderItem implements Serializable {
+public class ProductFavorite {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,9 +30,7 @@ public class OrderItem implements Serializable {
     @JoinColumn(name = "clothes_id")
     private Clothes clothes;
 
-    private int quantity;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id")
-    private Order order;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 }

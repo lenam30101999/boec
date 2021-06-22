@@ -1,4 +1,4 @@
-package com.spring.boec.entities.user;
+package com.spring.boec.model.user;
 
 
 import lombok.AllArgsConstructor;
@@ -13,20 +13,23 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "address")
+@Table(name = "full_name")
 @Builder
-public class Address implements Serializable {
+public class FullName implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "city")
-    private String city;
+    @Column(name = "firt_name")
+    private String firstName;
 
-    @Column(name = "street")
-    private String street;
+    @Column(name = "middle_name")
+    private String middleName;
 
-    @OneToOne(mappedBy = "address")
+    @Column(name = "last_name")
+    private String lastName;
+
+    @OneToOne(mappedBy = "fullName")
     private Customer customer;
 }

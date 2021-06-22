@@ -1,7 +1,7 @@
 package com.spring.boec.services.product;
 
 import com.spring.boec.dtos.ManuFacturerDTO;
-import com.spring.boec.entities.product.Manufacturer;
+import com.spring.boec.model.product.Manufacturer;
 import com.spring.boec.services.BaseService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

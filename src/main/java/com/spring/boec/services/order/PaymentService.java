@@ -1,8 +1,8 @@
 package com.spring.boec.services.order;
 
 import com.spring.boec.dtos.PaymentDTO;
-import com.spring.boec.entities.order.Order;
-import com.spring.boec.entities.order.Payment;
+import com.spring.boec.model.order.Order;
+import com.spring.boec.model.order.Payment;
 import com.spring.boec.services.BaseService;
 import com.spring.boec.utils.Util;
 import lombok.extern.log4j.Log4j2;
