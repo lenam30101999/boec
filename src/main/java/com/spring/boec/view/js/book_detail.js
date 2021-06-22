@@ -31,6 +31,7 @@ executeRating(ratingStars);
 function start(){
     console.log(bookId)
     getBook(viewBook)
+    getBook(viewReview)
     // addAction()
     getOrderCount(viewOrderCount)
     addReview()
@@ -122,6 +123,10 @@ function viewBook(book){
     document.getElementById("description").innerHTML = description;
     // view reviewer=============
 
+
+
+}
+function viewReview(book){
     var listReview=document.querySelector('#listReview');
     var htmls=book.ratings.map(function(review){
         var ok=`<div class="reviewer"> ${review.customer.fullName.firstName} ${review.customer.fullName.middleName} 
@@ -143,9 +148,7 @@ function viewBook(book){
         return ok+ok1+ok2;
     })
     listReview.innerHTML=htmls.join('');
-
 }
-
 function addToCart(book){
     var option={
         method: 'POST',
@@ -191,8 +194,7 @@ function addReview(){
             fetch(apiRating, option).then(function (responce) {
                 responce.json()
             }).then(function () {
-                getBook(viewBook);
-
+                start()
             });
         }
 
