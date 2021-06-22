@@ -2,8 +2,7 @@ package com.spring.boec.controllers;
 
 import com.spring.boec.dtos.ElectronicDTO;
 import com.spring.boec.dtos.MessageDTO;
-import com.spring.boec.services.ElectronicService;
-import com.spring.boec.services.ElectronicService;
+import com.spring.boec.services.product.ElectronicService;
 import com.spring.boec.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

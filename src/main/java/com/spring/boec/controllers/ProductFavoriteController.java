@@ -2,9 +2,7 @@ package com.spring.boec.controllers;
 
 import com.spring.boec.dtos.FavoriteDTO;
 import com.spring.boec.dtos.MessageDTO;
-import com.spring.boec.dtos.OrderItemDTO;
-import com.spring.boec.entities.ProductFavorite;
-import com.spring.boec.services.ProductFavoriteService;
+import com.spring.boec.services.product.ProductFavoriteService;
 import com.spring.boec.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

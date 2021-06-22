@@ -1,11 +1,8 @@
 package com.spring.boec.controllers;
 
 
-import com.spring.boec.dtos.AuthorDTO;
 import com.spring.boec.dtos.PublisherDTO;
-import com.spring.boec.entities.Publisher;
-import com.spring.boec.services.AuthorService;
-import com.spring.boec.services.PublisherService;
+import com.spring.boec.services.product.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -2,7 +2,7 @@ package com.spring.boec.controllers;
 
 import com.spring.boec.dtos.MessageDTO;
 import com.spring.boec.dtos.OrderDTO;
-import com.spring.boec.services.OrderService;
+import com.spring.boec.services.order.OrderService;
 import com.spring.boec.utils.Util;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;

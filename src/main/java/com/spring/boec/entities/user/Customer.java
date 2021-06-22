@@ -1,0 +1,53 @@
+package com.spring.boec.entities.user;
+
+
+import com.spring.boec.entities.order.Order;
+import com.spring.boec.entities.order.Payment;
+import com.spring.boec.entities.product.ProductFavorite;
+import com.spring.boec.entities.order.Rating;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "customer")
+@Builder
+public class Customer implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @MapsId
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "id")
+    private FullName fullName;
+
+    @MapsId
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "id")
+    private Address address;
+
+    @OneToOne(mappedBy = "customer")
+    private Account account;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orders;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Payment> payments;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Rating> ratings;
+
+    @OneToMany(mappedBy = "customer")
+    private List<ProductFavorite> productFavorites;
+}

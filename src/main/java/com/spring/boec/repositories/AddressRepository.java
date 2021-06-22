@@ -1,6 +1,6 @@
 package com.spring.boec.repositories;
 
-import com.spring.boec.entities.Address;
+import com.spring.boec.entities.user.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

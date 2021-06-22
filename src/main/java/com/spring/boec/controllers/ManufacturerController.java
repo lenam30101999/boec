@@ -1,9 +1,7 @@
 package com.spring.boec.controllers;
 
-import com.spring.boec.dtos.AuthorDTO;
 import com.spring.boec.dtos.ManuFacturerDTO;
-import com.spring.boec.services.AuthorService;
-import com.spring.boec.services.ManufacturerService;
+import com.spring.boec.services.product.ManufacturerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

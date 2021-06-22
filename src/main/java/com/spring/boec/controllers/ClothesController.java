@@ -2,7 +2,7 @@ package com.spring.boec.controllers;
 
 import com.spring.boec.dtos.ClothesDTO;
 import com.spring.boec.dtos.MessageDTO;
-import com.spring.boec.services.ClothesService;
+import com.spring.boec.services.product.ClothesService;
 import com.spring.boec.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

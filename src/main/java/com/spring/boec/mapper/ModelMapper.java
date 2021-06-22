@@ -1,7 +1,12 @@
 package com.spring.boec.mapper;
 
 import com.spring.boec.dtos.*;
-import com.spring.boec.entities.*;
+import com.spring.boec.entities.order.Order;
+import com.spring.boec.entities.order.Payment;
+import com.spring.boec.entities.order.Rating;
+import com.spring.boec.entities.orderItem.OrderItem;
+import com.spring.boec.entities.product.*;
+import com.spring.boec.entities.user.*;
 import com.spring.boec.utils.Helper;
 import org.mapstruct.*;
 

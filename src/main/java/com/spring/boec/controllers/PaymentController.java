@@ -2,7 +2,7 @@ package com.spring.boec.controllers;
 
 import com.spring.boec.dtos.MessageDTO;
 import com.spring.boec.dtos.PaymentDTO;
-import com.spring.boec.services.PaymentService;
+import com.spring.boec.services.order.PaymentService;
 import com.spring.boec.utils.Util;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;

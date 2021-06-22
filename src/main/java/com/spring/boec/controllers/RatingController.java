@@ -2,7 +2,7 @@ package com.spring.boec.controllers;
 
 import com.spring.boec.dtos.MessageDTO;
 import com.spring.boec.dtos.RatingDTO;
-import com.spring.boec.services.RatingService;
+import com.spring.boec.services.order.RatingService;
 import com.spring.boec.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
