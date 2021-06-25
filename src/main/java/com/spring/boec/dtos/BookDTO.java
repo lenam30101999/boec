@@ -1,7 +1,5 @@
 package com.spring.boec.dtos;
 
-import com.spring.boec.entities.Rating;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;

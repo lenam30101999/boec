@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/users")
 public class AccountController {
@@ -29,7 +31,7 @@ public class AccountController {
 
   @CrossOrigin(origins = "*")
   @PostMapping(path = "/signup")
-  public ResponseEntity<?> signup(@RequestBody AccountDTO accountDTO) {
+  public ResponseEntity<?> signup(@Valid @RequestBody AccountDTO accountDTO) {
     AccountDTO data = accountService.signup(accountDTO);
     if (data != null){
       return new ResponseEntity<>(new MessageDTO(Util.SIGN_UP_SUCCESS), HttpStatus.OK);

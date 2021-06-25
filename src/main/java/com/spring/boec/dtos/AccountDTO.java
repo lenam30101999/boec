@@ -1,5 +1,6 @@
 package com.spring.boec.dtos;
 
+import com.spring.boec.annotations.PhoneNumberConstraint;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +20,7 @@ public class AccountDTO {
   private String password;
 
   @NotNull
+  @PhoneNumberConstraint
   private String phoneNo;
 
   @NotNull
